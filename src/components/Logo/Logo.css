@@ -1,0 +1,13 @@
+.logo {
+    height: 38px;
+    width: 38px;
+}
+
+.header__logo {
+    opacity: 1;
+    transition: all .3s ease .1s;
+}
+
+.header__logo:hover {
+    opacity: 0.5;
+}
