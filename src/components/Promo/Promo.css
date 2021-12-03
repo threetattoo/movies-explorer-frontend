@@ -1,4 +1,4 @@
-.promo {
+.promo__wrapper {
     min-height: 524px;
     display: flex;
     flex-direction: column;
@@ -27,7 +27,7 @@
 }
 
 @media screen and (max-width: 768px) {
-    .promo {
+    .promo__wrapper {
         min-height: 784px;
     }
 
@@ -41,7 +41,7 @@
 }
 
 @media screen and (max-width: 320px) {
-    .promo {
+    .promo__wrapper {
         min-height: 570px;
     }
 
