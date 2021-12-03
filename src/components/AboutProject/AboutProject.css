@@ -1,0 +1,69 @@
+.about-project {
+    padding: 110px 70px;
+    color: #000000;
+}
+
+.about-project__title {
+    margin: 0 0 23px;
+    font-weight: normal;
+    font-size: 22px;
+    line-height: 27px;
+    letter-spacing: -0.04em;
+
+}
+
+.about-project__subline {
+    margin: 0;
+    border: 0;
+    border-bottom: 1px solid #000;
+}
+
+.about-project__wrapper {
+    margin: 70px 0 110px 0;
+}
+
+.about-project__columns {
+    max-width: 100%;
+    display: grid;
+    grid-column-gap: 40px;
+    grid-template-columns: repeat(2,minmax(200px, calc(50% - 20px)));
+}
+
+.about-project__column-title {
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: -0.04em;
+    margin-bottom: 26px;
+}
+
+.about-project__column-text {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.about-project__progressbar {
+    margin-top: 110px;
+    font-size: 14px;
+    line-height: 17px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 20% 80%;
+    grid-auto-rows: 36px;
+}
+
+.about-project__progressbar-part {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-project__progressbar-part_backend {
+    background-color: #2BE080;
+}
+
+.about-project__progressbar-part_frontend {
+    background-color: #F2F2F2;
+}

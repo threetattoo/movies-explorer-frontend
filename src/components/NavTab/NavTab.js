@@ -6,7 +6,7 @@ function NavTab() {
         <nav className="promo__navtab">
             <ul className="promo__navtab-list">
                 <li className="promo__navtab-item">
-                    <a href="#" className="promo__navtab-link">О проекте</a>
+                    <a href="/#about-project" className="promo__navtab-link">О проекте</a>
                 </li>
                 <li className="promo__navtab-item">
                     <a href="#" className="promo__navtab-link">Технологии</a>
