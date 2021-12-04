@@ -9,10 +9,10 @@ function NavTab() {
                     <a href="/#about-project" className="promo__navtab-link">О проекте</a>
                 </li>
                 <li className="promo__navtab-item">
-                    <a href="#" className="promo__navtab-link">Технологии</a>
+                    <a href="/#techs" className="promo__navtab-link">Технологии</a>
                 </li>
                 <li className="promo__navtab-item">
-                    <a href="#" className="promo__navtab-link">Студент</a>
+                    <a href="/#about-me" className="promo__navtab-link">Студент</a>
                 </li>
             </ul>
         </nav>
