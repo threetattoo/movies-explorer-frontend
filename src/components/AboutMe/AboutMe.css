@@ -72,3 +72,53 @@
 .about-me__link:hover {
     opacity: 0.5;
 }
+
+@media screen and (max-width: 768px) {
+    .about-me {
+        padding: 90px 50px;
+    }
+
+    .about-me__profile {
+        margin-top: 66px;
+    }
+
+    .about-me__photo {
+        width: 255px;
+        height: 307px;
+    }
+
+    .about-me__links {
+        margin: 87px 0 0 0;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .about-me {
+        padding: 70px 18px;
+    }
+
+    .about-me__profile {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+        margin-top: 60px;
+    }
+
+    .about-me__name {
+        margin-top: 40px;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 30px;
+        line-height: 36px;
+        letter-spacing: -0.04em;
+    }
+
+    .about-me__photo {
+        width: 292px;
+        height: 352px;
+    }
+
+    .about-me__links {
+        margin: 40px 0 0 0;
+    }
+}
