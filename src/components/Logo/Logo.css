@@ -1,13 +1,18 @@
 .logo {
     height: 38px;
     width: 38px;
-}
-
-.header__logo {
+    background-image: url(../../images/logo.svg);
+    background-repeat: no-repeat;
     opacity: 1;
     transition: all .3s ease .1s;
 }
 
-.header__logo:hover {
+.logo:hover {
     opacity: 0.5;
+}
+
+@media screen and (max-width: 768px) {
+    .logo {
+        background-image: url(../../images/logo_auth.svg);
+    }
 }
