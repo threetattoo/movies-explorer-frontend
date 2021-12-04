@@ -18,10 +18,6 @@
     border-bottom: 1px solid #000000;
 }
 
-.about-project__wrapper {
-    margin: 70px 0 110px 0;
-}
-
 .about-project__columns {
     max-width: 100%;
     display: grid;
@@ -66,4 +62,26 @@
 
 .about-project__progressbar-part_frontend {
     background-color: #F2F2F2;
+}
+
+@media screen and (max-width: 768px) {
+    .about-project {
+        padding: 90px 50px;
+    }
+
+    .about-project__columns {
+        grid-column-gap: 30px;
+        grid-template-columns: repeat(2,minmax(200px,calc(50% - 15px)));
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .about-project {
+        padding: 70px 18px;
+    }
+
+    .about-project__columns {
+        margin: 60px 0 0 0;
+        grid-template-columns: repeat(1,minmax(200px, 600px));
+    }
 }
