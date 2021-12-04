@@ -63,3 +63,20 @@
     background-color: #E8E8E8;
     border-radius: 10px;
 }
+
+@media screen and (max-width: 768px) {
+    .techs {
+        padding: 90px 50px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .techs {
+        padding: 70px 18px;
+    }
+
+    .techs__list {
+        margin-top: 50px;
+        grid-template-columns: repeat(2,84px);
+    }
+}
