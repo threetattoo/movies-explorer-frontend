@@ -11,7 +11,7 @@ function Nav() {
                     </a>
                 </li>
                 <li className="nav__item">
-                    <a href="/signup" className="link nav__link nav__login-link">
+                    <a href="/signin" className="link nav__link nav__login-link">
                         Войти
                     </a>
                 </li>
