@@ -2,20 +2,6 @@
     padding: 110px 70px 125px 70px;
 }
 
-.about-me__title {
-    font-style: normal;
-    font-weight: normal;
-    font-size: 22px;
-    line-height: 27px;
-    letter-spacing: -0.04em;
-}
-
-.about-me__subline {
-    margin: 0;
-    border: 0;
-    border-bottom: 1px solid #000000;
-}
-
 .about-me__wrapper {
     display: flex;
     flex-direction: column;
@@ -64,13 +50,7 @@
 
 .about-me__link {
     text-decoration: none;
-    color: #000;
-    opacity: 1;
-    transition: all .3s ease .1s;
-}
-
-.about-me__link:hover {
-    opacity: 0.5;
+    color: #000000;
 }
 
 @media screen and (max-width: 768px) {

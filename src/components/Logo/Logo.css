@@ -3,12 +3,6 @@
     width: 38px;
     background-image: url(../../images/logo.svg);
     background-repeat: no-repeat;
-    opacity: 1;
-    transition: all .3s ease .1s;
-}
-
-.logo:hover {
-    opacity: 0.5;
 }
 
 @media screen and (max-width: 768px) {

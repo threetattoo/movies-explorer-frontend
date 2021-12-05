@@ -6,12 +6,12 @@ function Nav() {
         <nav className="nav">
             <ul className="nav__list">
                 <li className="nav__item">
-                    <a href="/signup" className="nav__link nav__register-link">
+                    <a href="/signup" className="link nav__link nav__register-link">
                         Регистрация
                     </a>
                 </li>
                 <li className="nav__item">
-                    <a href="/signup" className="nav__link nav__login-link">
+                    <a href="/signup" className="link nav__link nav__login-link">
                         Войти
                     </a>
                 </li>

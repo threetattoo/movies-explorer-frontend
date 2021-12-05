@@ -34,12 +34,6 @@
     line-height: 50px;
     letter-spacing: -0.04em;
     color: #000000;
-    opacity: 1;
-    transition: all .3s ease .1s;
-}
-
-.portfolio__link:hover {
-    opacity: 0.5;
 }
 
 .portfolio__site-name {
@@ -60,7 +54,7 @@
     }
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 520px) {
     .portfolio {
         padding: 70px 14px;
     }

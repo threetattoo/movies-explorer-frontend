@@ -24,12 +24,6 @@
     font-size: 13px;
     line-height: 16px;
     color: #FFFFFF;
-    opacity: 1;
-    transition: all .3s ease .1s;
-}
-
-.promo__navtab-link:hover {
-    opacity: 0.5;
 }
 
 @media screen and (max-width: 320px) {

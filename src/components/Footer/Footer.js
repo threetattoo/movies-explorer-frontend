@@ -12,12 +12,12 @@ function Footer() {
                 <p className="footer__copyright">© 2021</p>
                 <ul className="footer__list">
                     <li className="footer__item">
-                        <a className="footer__link" href="https://practicum.yandex.ru" target="_blank" rel="noreferrer">Яндекс.Практикум</a>
+                        <a className="link footer__link" href="https://practicum.yandex.ru" target="_blank" rel="noreferrer">Яндекс.Практикум</a>
                     </li>
-                    <li className="footer__item">
+                    <li className="link footer__item">
                         <a className="footer__link" href="https://github.com/threetattoo/" target="_blank" rel="noreferrer">Github</a>
                     </li>
-                    <li className="footer__item">
+                    <li className="link footer__item">
                         <a className="footer__link" href="https://facebook.com" target="_blank" rel="noreferrer">Facebook</a>
                     </li>
                 </ul>
