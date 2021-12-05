@@ -81,14 +81,33 @@
     }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 768px) {
+    .techs__list {
+        margin: 50px 0 0 0;
+        row-gap: 10px;
+        grid-template-columns: repeat(3,84px);
+    }
+}
+
+@media screen and (max-width: 425px) {
     .techs {
         padding: 70px 18px;
+    }
+
+    .techs__subtitle {
+        font-size: 30px;
+        line-height: 36px;
     }
 
     .techs__list {
         margin: 50px 0 0 0;
         row-gap: 10px;
+        grid-template-columns: repeat(3,84px);
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .techs__list {
         grid-template-columns: repeat(2,84px);
     }
 }

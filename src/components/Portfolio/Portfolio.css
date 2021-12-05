@@ -49,3 +49,29 @@
 .portfolio__arrow-wrapper {
     margin: 0;
 }
+
+@media screen and (max-width: 768px) {
+    .portfolio {
+        padding: 90px 50px;
+    }
+    .portfolio__link {
+        font-size: 28px;
+        line-height: 50px;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .portfolio {
+        padding: 70px 14px;
+    }
+
+    .portfolio__title {
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .portfolio__link {
+        font-size: 18px;
+        line-height: 28px;
+    }
+}

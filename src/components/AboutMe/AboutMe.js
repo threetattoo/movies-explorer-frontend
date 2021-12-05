@@ -32,7 +32,9 @@ function AboutMe() {
                         </li>
                     </ul>
                 </div>
-                <img src={profilephoto} alt="Фото профайла" className="about-me__photo" />
+                <div className="about-me__photo-wrapper">
+                    <img src={profilephoto} alt="Фото профайла" className="about-me__photo" />
+                </div>
             </div>
         </section>
     );
