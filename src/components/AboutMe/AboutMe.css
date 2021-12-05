@@ -44,7 +44,7 @@
 }
 
 .about-me__text {
-    max-width: 600px;
+    width: calc(100% - 5px);
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
@@ -93,6 +93,10 @@
 }
 
 @media screen and (max-width: 680px) {
+    .about-me__text {
+        width: 100%;
+    }
+
     .about-me__profile {
         display: flex;
         flex-direction: column-reverse;

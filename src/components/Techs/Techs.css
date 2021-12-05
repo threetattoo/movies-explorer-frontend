@@ -85,7 +85,7 @@
     .techs__list {
         margin: 50px 0 0 0;
         row-gap: 10px;
-        grid-template-columns: repeat(3,84px);
+        grid-template-columns: repeat(4,84px);
     }
 }
 
