@@ -1,0 +1,49 @@
+.not-found {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.not-found__code {
+    margin: 0 0 5px;
+    font-weight: 400;
+    font-size: 140px;
+    line-height: 169px;
+    color: #000000;
+}
+
+.not-found__message {
+    margin: 0;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+}
+
+.not-found__link {
+    margin: 184px 0 0;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #3456F3;
+    text-decoration: none;
+}
+
+@media screen and (max-width: 425px) {
+    .not-found__code {
+        margin-top: 50%;
+        margin-bottom: 10px;
+        font-size: 80px;
+        line-height: 97px;
+    }
+
+    .not-found__message {
+        font-size: 12px;
+        line-height: 15px;
+    }
+
+    .not-found__link {
+        margin-top: 284px;
+    }
+}
