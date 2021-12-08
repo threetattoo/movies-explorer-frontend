@@ -16,7 +16,9 @@ function App() {
         <div className="page">
             <Switch>
                 <Route exact path="/">
-                    <Header />
+                    <Header
+                        type=""
+                    />
                     <Main />
                     <Footer />
                 </Route>

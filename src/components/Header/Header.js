@@ -1,13 +1,23 @@
 import React from 'react';
 import Logo from '../Logo/Logo';
 import Nav from '../Nav/Nav';
+import NavAuth from '../NavAuth/NavAuth';
 import './Header.css';
 
-function Header() {
+function Header( { type, } ) {
+
+    const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+
+    function toggleMenu() {
+        setIsMenuOpen(!isMenuOpen);
+    }
+
     return (
-        <header className="header">
+        <header className={`header ${
+                type === "auth" ? "header__authorized" : ""
+            }`}>
             <Logo />
-            <Nav />
+            {type === "auth" ? <NavAuth isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} /> : <Nav />}
         </header>
     );
 }
