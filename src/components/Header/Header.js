@@ -2,6 +2,7 @@ import React from 'react';
 import Logo from '../Logo/Logo';
 import Nav from '../Nav/Nav';
 import NavAuth from '../NavAuth/NavAuth';
+import Navigation from '../Navigation/Navigation';
 import './Header.css';
 
 function Header( { type, } ) {
@@ -17,7 +18,7 @@ function Header( { type, } ) {
                 type === "auth" ? "header__authorized" : ""
             }`}>
             <Logo />
-            {type === "auth" ? <NavAuth isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} /> : <Nav />}
+            <Navigation isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
         </header>
     );
 }

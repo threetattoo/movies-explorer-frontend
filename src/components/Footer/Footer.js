@@ -7,7 +7,6 @@ function Footer() {
             <p className="footer__info">
                 Учебный проект Яндекс.Практикум х BeatFilm.
             </p>
-            <hr className="footer__line" />
             <div className="footer__container">
                 <p className="footer__copyright">© 2021</p>
                 <ul className="footer__list">

@@ -20,7 +20,6 @@ function SearchForm() {
                     <FilterCheckbox  isMoviesShort={isMoviesShort} changeMoviesType={changeMoviesType} />
                 </form>
             </div>
-            <hr className="search-form__subline" />
         </section>
     )
 }

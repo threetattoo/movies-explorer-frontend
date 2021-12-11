@@ -1,0 +1,66 @@
+.movies-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.movies-card__thumb {
+    width: 100%;
+    object-fit: cover;
+}
+
+.movies-card__info {
+    margin-top: 10px;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.movies-card__title {
+    margin: 0;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+}
+
+.movies-card__type-save {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: #F5F5F5;
+    border: none;
+    outline:none;
+    background-image: url("../../images/heart-white.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+}
+
+.movies-card__type-saved {
+    background-image: url("../../images/heart-red.svg");
+}
+
+.movies-card__type-delete {
+    background-image: url("../../images/movie-delete.svg");
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.5s linear;
+}
+
+.movies-card__duration {
+    padding-top: 6px;
+    border-top: 1px solid #E8E8E8;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 13px;
+    color: #A0A0A0;
+}
+
+.movies-card_saved {
+    cursor: pointer;
+}
+
+.movies-card_saved:hover .movies-card__type-delete {
+    visibility: visible;
+    opacity: 1;
+}
