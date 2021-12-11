@@ -1,7 +1,5 @@
 import React from 'react';
 import Logo from '../Logo/Logo';
-import Nav from '../Nav/Nav';
-import NavAuth from '../NavAuth/NavAuth';
 import Navigation from '../Navigation/Navigation';
 import './Header.css';
 
