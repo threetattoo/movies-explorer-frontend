@@ -1,4 +1,10 @@
-# Getting Started with Create React App
+# movies-explorer-frontend
+
+Ссылка на фронтенд проекта - https://threetattoo-diploma.nomoredomains.rocks
+
+Публичный ip проекта - 51.250.25.152
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
