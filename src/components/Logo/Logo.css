@@ -5,12 +5,6 @@
     background-repeat: no-repeat;
 }
 
-@media screen and (max-width: 800px) {
-    .logo__main {
-        background-image: url(../../images/logo-smile.svg);
-    }
-}
-
 .logo__main_movies {
     background-image: url(../../images/logo-circle.svg);
 }
@@ -19,17 +13,19 @@
     background-image: url(../../images/logo-smile.svg);
 }
 
-@media screen and (max-width: 800px) {
-    .logo__main_movies {
-        background-image: url(../../images/logo-smile.svg);
-    }
-}
-
 .logo__main_profile {
     background-image: url(../../images/logo-circle.svg);
 }
 
 @media screen and (max-width: 800px) {
+    .logo__main {
+        background-image: url(../../images/logo-smile.svg);
+    }
+
+    .logo__main_movies {
+        background-image: url(../../images/logo-smile.svg);
+    }
+
     .logo__main_profile {
         background-image: url(../../images/logo-dollar.svg);
     }

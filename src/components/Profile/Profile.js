@@ -15,14 +15,13 @@ function Profile() {
                     </h1>
                     <form class="profile__form">
                         <div class="profile__wrapper">
-                            <div class="profile__field">
+                            <div class="profile__field profile__field_name">
                                 <h2 class="profile__field-name">
                                     Имя
                                 </h2>
                                 <input class="profile__field-value" type="text" name="name" required="" value="Username" disabled="" />
                             </div>
-                            <hr class="profile__line" />
-                            <div class="profile__field">
+                            <div class="profile__field profile__field_password">
                                 <h2 class="profile__field-name">E-mail</h2>
                                 <input class="profile__field-value" type="email" name="email" required="" value="Username@mail.com" disabled="" />
                                 </div>

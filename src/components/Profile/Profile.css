@@ -29,6 +29,16 @@
     justify-content: space-between;
 }
 
+.profile__field_name {
+    border-bottom: 1px solid #E8E8E8;
+    box-sizing: border-box;
+    padding-bottom: 16px;
+}
+
+.profile__field_password {
+    padding-top: 16px;
+}
+
 .profile__field-name {
     margin: 0;
     font-weight: 500;
@@ -89,15 +99,25 @@
     .profile__form {
         width: 396px;
     }
+
+    .profile__wrapper {
+        margin: 96px 0 210px;
+    }
 }
   
 @media (max-width: 520px) {
     .profile {
         padding: 70px 30px 40px;
     }
+
+    .profile__wrapper {
+        margin: 80px 0 210px;
+        flex-grow: 1;
+    }
   
     .profile__form {
         width: 100%;
+        min-height: 80vh;
     }
   
     .profile__info {
