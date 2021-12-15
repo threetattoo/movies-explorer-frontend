@@ -45,17 +45,21 @@
 }
 
 .nav-auth {
+    width: calc(100% - 38px);
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 .nav-auth__menu {
+    width: 100%;
     display: flex;
     align-items: center;
     height: 32px;
 }
 
 .nav-auth__burger-button {
+    margin-left: auto;
     width: 42px;
     height: 42px;
     background: url(../../images/burger_icon.png) 50% no-repeat;
@@ -65,13 +69,14 @@
   }
 
 .nav-auth__list {
+    margin-left: 44px;
     list-style-type: none;
     padding: 0;
     display: flex;
-    margin-right: 50px;
 }
 
 .nav-auth__link {
+    margin-left: auto;
     text-decoration: none;
     color: #000000;
     font-weight: 400;
@@ -80,7 +85,7 @@
 }
 
 .nav-auth__item_main-page {
-    visibility: hidden;
+    display: none;
 }
 
 .nav-auth__item:not(:last-of-type) {
@@ -164,7 +169,7 @@
     }
 
     .nav-auth__item_main-page {
-        visibility: visible;
+        display: inline-block;
     }
 
     .nav-auth__list {

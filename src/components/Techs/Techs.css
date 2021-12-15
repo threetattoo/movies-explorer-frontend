@@ -12,6 +12,7 @@
 }
 
 .techs__subtitle {
+    margin: 90px 0 26px 0;
     font-weight: 400;
     font-style: normal;
     font-size: 50px;
@@ -20,6 +21,7 @@
 }
 
 .techs__text {
+    margin: 0;
     max-width: 460px;
     font-style: normal;
     font-weight: normal;
@@ -34,7 +36,7 @@
     margin-top: 100px;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(7,84px);
+    grid-template-columns: repeat(7,90px);
     grid-column-gap: 10px;
     column-gap: 10px;
 }

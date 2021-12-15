@@ -14,10 +14,9 @@ function AboutMe() {
                     <h3 className="about-me__name">Михаил</h3>
                     <p className="about-me__job">Фронтенд-разработчик, 35 лет</p>
                     <p className="about-me__text">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod 
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequatLorem ipsum dolor sit amet,
+                    consectetur adipisicing elit, sed do eiusmod tempor incididun.
                     </p>
                     <ul className="about-me__links">
                         <li className="about-me__item">

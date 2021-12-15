@@ -30,6 +30,7 @@
 }
 
 .about-me__text {
+    margin: 26px 0 0;
     width: calc(100% - 5px);
     font-style: normal;
     font-weight: normal;
@@ -56,6 +57,24 @@
 @media screen and (max-width: 768px) {
     .about-me {
         padding: 90px 50px;
+    }
+
+    .about-me__name {
+        font-size: 40px;
+        line-height: 40px;
+        margin: 0 0 16px;
+    }
+
+    .about-me__job {
+        font-size: 12px;
+        line-height: 18px; 
+    }
+
+    .about-me__text {
+        width: calc(100% - 49px);
+        margin: 20px 0 0;
+        font-size: 12px;
+        line-height: 18px;
     }
 
     .about-me__profile {

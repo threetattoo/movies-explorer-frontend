@@ -10,11 +10,11 @@ function MoviesCardList() {
             <Route path="/movies">
                 <section className="movies">
                     <ul className="movies-card__list">
+                        <MoviesCard type="saved" />
                         <MoviesCard />
+                        <MoviesCard type="saved" />
                         <MoviesCard />
-                        <MoviesCard />
-                        <MoviesCard />
-                        <MoviesCard />
+                        <MoviesCard type="saved" />
                         <MoviesCard />
                         <MoviesCard />
                     </ul>

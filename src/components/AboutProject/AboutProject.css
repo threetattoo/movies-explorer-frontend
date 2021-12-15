@@ -1,5 +1,5 @@
 .about-project {
-    padding: 110px 70px;
+    padding: 110px 70px 101px 70px;
     color: #000000;
 }
 
@@ -11,7 +11,7 @@
 }
 
 .about-project__column-title {
-    font-weight: normal;
+    font-weight: 400;
     font-size: 20px;
     line-height: 24px;
     letter-spacing: -0.04em;
@@ -20,7 +20,7 @@
 
 .about-project__column-text {
     font-style: normal;
-    font-weight: normal;
+    font-weight: 400;
     font-size: 14px;
     line-height: 20px;
 }

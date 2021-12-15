@@ -4,7 +4,7 @@
 
 .portfolio__title {
     color: #A0A0A0;
-    margin: 0;
+    margin-bottom: 30px;
     font-style: normal;
     font-weight: normal;
     font-size: 18px;
@@ -14,14 +14,16 @@
 .portfolio__list {
     list-style-type: none;
     padding: 0;
+    margin: 0;
 }
 
 .portfolio__item {
     padding: 20px 0 20px 0;
+    box-sizing: border-box;
 }
 
 .portfolio__item:not(:last-of-type) {
-    border-bottom: 1px solid #E5E5E5;
+    border-bottom: 1px solid #E8E8E8;
 }
 
 .portfolio__link {
@@ -60,6 +62,7 @@
     }
 
     .portfolio__title {
+        margin-bottom: 20px;
         font-size: 14px;
         line-height: 20px;
     }

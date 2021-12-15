@@ -15,7 +15,6 @@
 }
 
 .not-found__message {
-    margin: 0;
     font-weight: 400;
     font-size: 16px;
     line-height: 19px;
@@ -26,7 +25,7 @@
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
-    color: #3456F3;
+    color: #2BE080;
     text-decoration: none;
 }
 

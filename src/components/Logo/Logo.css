@@ -1,38 +1,6 @@
 .logo__main {
     height: 38px;
     width: 38px;
-    background-image: url(../../images/logo-main.svg);
-    background-repeat: no-repeat;
-}
-
-.logo__main_movies {
-    background-image: url(../../images/logo-circle.svg);
-}
-
-.logo__main_smile {
     background-image: url(../../images/logo-smile.svg);
-}
-
-.logo__main_profile {
-    background-image: url(../../images/logo-circle.svg);
-}
-
-@media screen and (max-width: 800px) {
-    .logo__main {
-        background-image: url(../../images/logo-smile.svg);
-    }
-
-    .logo__main_movies {
-        background-image: url(../../images/logo-smile.svg);
-    }
-
-    .logo__main_profile {
-        background-image: url(../../images/logo-dollar.svg);
-    }
-}
-
-@media screen and (max-width: 425px) {
-    .logo__main_profile {
-        background-image: url(../../images/logo-smile.svg);
-    }
+    background-repeat: no-repeat;
 }

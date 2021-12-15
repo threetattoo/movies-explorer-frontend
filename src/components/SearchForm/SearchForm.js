@@ -14,9 +14,11 @@ function SearchForm() {
         <section className="searchform">
             <div className="searchform__wrapper">
                 <form className="searchform__search-form">
-                    <input className="search-form__input" placeholder="Фильм" name="searchValue" id="searchValue" value="" />
-                    <button className="search-form__submit" type="submit">
-                    </button>
+                    <fieldset className="searchform__input-fieldset">
+                        <input className="search-form__input" placeholder="Фильм" name="searchValue" id="searchValue" value="" />
+                        <button className="search-form__submit" type="submit">
+                        </button>
+                    </fieldset>
                     <FilterCheckbox  isMoviesShort={isMoviesShort} changeMoviesType={changeMoviesType} />
                 </form>
             </div>
