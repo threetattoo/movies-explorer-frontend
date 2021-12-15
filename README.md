@@ -2,7 +2,7 @@
 
 Ссылка на фронтенд проекта - https://threetattoo-diploma.nomoredomains.rocks
 
-Публичный ip проекта - 51.250.25.152
+Ссылка на макет - https://www.figma.com/file/XWkHEeBq4z88uOLfUD7Xyc/Diploma-(Copy)?node-id=891%3A3857
 
 ## Getting Started with Create React App
 
