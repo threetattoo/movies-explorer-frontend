@@ -16,9 +16,7 @@ class MoviesApi {
     getMovies() {
         return fetch(`${this._apiUrl}`, {
             method: 'GET',
-            headers: {
-                ...this._headers,
-            },
+            headers: this._headers
         })
         .then(response => this._checkApiRequest(response));
     }
