@@ -1,0 +1,38 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    min-width: 320px;
+    max-width: 100%;
+    min-height: 100vh;
+    background-color: #FFFFFF;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    color: #000000;
+    font-family: 'Inter', Arial, sans-serif;
+}
+
+.section__title {
+    margin: 0 0 23px;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 27px;
+    letter-spacing: -0.04em;
+}
+
+.section__subline {
+    margin: 0;
+    border: 0;
+    border-bottom: 1px solid #000000;
+}
+
+.link {
+    opacity: 1;
+    transition: all .3s ease .1s;
+}
+
+.link:hover {
+    opacity: 0.5;
+}

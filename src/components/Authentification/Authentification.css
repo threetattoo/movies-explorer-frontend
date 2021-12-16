@@ -1,0 +1,116 @@
+.authentification {
+    display: flex;
+    justify-content: center;
+}
+
+.authentification__wrapper {
+    margin-top: 70px;
+    width: 396px;
+}
+
+.authentification__title {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+    margin: 40px 0 40px 0;
+}
+
+.authentification__form {
+    width: 100%;
+}
+
+.authentification__form-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.authentification__form-label {
+    margin-top: 10px;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    color: #A0A0A0;
+}
+
+.authentification__form-input {
+    padding: 15px;
+    border-radius: 8px;
+    border: 0;
+    background-color: #F9F9F9;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+}
+
+.authentification__form-input:focus {
+    border: 1px solid #3456F3;
+  }
+
+.authentification__form-input {
+    margin: 10px 0 10px 0;
+}
+
+.authentification__form-error {
+    margin: 0;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    color: #EE3465;
+}
+
+.authentification__submit-button {
+    margin: 69px 0 16px;
+    width: 100%;
+    background-color: #2BE080;
+    color: #FFFFFF;
+    border-radius: 3px;
+    padding: 13px 0 15px;
+    border: 0;
+    outline: 0;
+    transition: all .5s;
+    cursor: pointer;
+}
+
+.authentification__help-text {
+    margin: 0;
+    text-align: center;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #A0A0A0;
+}
+
+.authentification__help-link {
+    margin-left: 6px;
+    text-decoration: none;
+    color: #2BE080;
+}
+
+@media screen and (max-width: 425px) {
+    .authentification__wrapper {
+        width: 100%;
+        padding: 0 30px 0 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .logo__link {
+        display: flex;
+        justify-content: center;
+    }
+
+    .authentification__title {
+        margin: 50px 0 80px 0;
+        text-align: center;
+    }
+
+    .authentification__submit-button {
+        margin: 157px 0 14px;
+    }
+
+    .authentification__help-text {
+        font-size: 12px;
+        line-height: 15px;
+    }
+}
