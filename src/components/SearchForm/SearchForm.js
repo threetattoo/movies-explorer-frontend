@@ -15,7 +15,7 @@ function SearchForm() {
             <div className="searchform__wrapper">
                 <form className="searchform__search-form">
                     <fieldset className="searchform__input-fieldset">
-                        <input className="search-form__input" placeholder="Фильм" name="searchValue" id="searchValue" value="" />
+                        <input className="search-form__input" placeholder="Фильм" name="searchValue" id="searchValue" value="" required />
                         <button className="search-form__submit" type="submit">
                         </button>
                     </fieldset>
