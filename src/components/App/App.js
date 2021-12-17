@@ -1,5 +1,4 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
@@ -10,7 +9,11 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import NotFound from '../NotFound/NotFound';
 import Footer from '../Footer/Footer';
+import { Route, Switch } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import CurrentUserContext from '../../context/CurrentUserContext';
+import ProtectedRoute from  '../ProtectedRoute/ProtectedRoute';
+import mainApi from '../../utils/MainApi';
 
 function App() {
     return (
