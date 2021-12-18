@@ -16,37 +16,45 @@ import ProtectedRoute from  '../ProtectedRoute/ProtectedRoute';
 import mainApi from '../../utils/MainApi';
 
 function App() {
-    return (
-        <div className="page">
-            <Switch>
-                <Route exact path="/">
-                    <Header
-                        type=""
-                    />
-                    <Main />
-                    <Footer />
-                </Route>
-                <Route exact path="/movies">
-                    <Movies />
-                </Route>
-                <Route exact path="/saved-movies">
-                    <SavedMovies />
-                </Route>
-                <Route exact path="/profile">
-                    <Profile />
-                </Route>
-                <Route exact path="/signin">
-                    <Login />
-                </Route>
-                <Route exact path="/signup">
-                    <Register />
-                </Route>
-                <Route path="*">
-                    <NotFound />
-                </Route>
-            </Switch>
+    const [ currentUser, setCurrentUser ] = React.useState({});
+    const [ isLoggedIn, setIsLoggedIn ] = React.useState(false);
 
-        </div>
+    return (
+        <CurrentUserContext.Provider value={ currentUser }>
+            <div className="page">
+                <Switch>
+                    <Route exact path="/">
+                        <Header
+                            type=""
+                        />
+                        <Main />
+                        <Footer />
+                    </Route>
+                    <ProtectedRoute 
+                        path="/movies"
+                        component={Movies}
+                    />
+                    <ProtectedRoute
+                        path="/saved-movies"
+                        component={SavedMovies}
+                    />
+                    <ProtectedRoute
+                        path="/profile" 
+                        component={Profile}
+                    />
+                    <Route path="/signin">
+                        <Login />
+                    </Route>
+                    <Route path="/signup">
+                        <Register />
+                    </Route>
+                    <Route path="*">
+                        <NotFound />
+                    </Route>
+                </Switch>
+
+            </div>
+        </CurrentUserContext.Provider>
     );
 }
     

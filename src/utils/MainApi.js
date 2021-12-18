@@ -13,6 +13,42 @@ class MainApi {
         return Promise.reject(new Error(`Ошибка запроса: ${response.status}`));
     }
 
+    login({ name, password, email }) {
+        return fetch(`${this._headers}/signup`, {
+            method: 'POST',
+            headers: this._headers,
+            credentials: 'include',
+            body: JSON.stringify({
+                name,
+                password,
+                email,
+            }),
+        })
+        .then((response) => this._checkApiRequest(response))
+    };
+
+    register({ email, password }) {
+        return fetch(`${this._apiUrl}/signin`, {
+            method: 'POST',
+            headers: this._headers,
+            credentials: 'include',
+            body: JSON.stringify({
+                password,
+                email,
+            }),
+        })
+        .then((response) => this._checkApiRequest(response))
+    };
+
+    logout() {
+        return fetch(`${this._apiUrl}/signout`, {
+            method: 'DELETE',
+            headers: this._headers,
+            credentials: 'include',
+        })
+        .then((response) => this._checkApiRequest(response))
+    };
+
     getUserInfo() {
         return fetch(`${this._apiUrl}/users/me`, {
             method: 'GET',
