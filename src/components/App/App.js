@@ -9,7 +9,8 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import NotFound from '../NotFound/NotFound';
 import Footer from '../Footer/Footer';
-import { Route, Switch } from 'react-router-dom';
+import Preloader from '../Preloader/Preloader';
+import { Route, Switch, useLocation, useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import CurrentUserContext from '../../context/CurrentUserContext';
 import ProtectedRoute from  '../ProtectedRoute/ProtectedRoute';
@@ -18,9 +19,96 @@ import mainApi from '../../utils/MainApi';
 function App() {
     const [ currentUser, setCurrentUser ] = React.useState({});
     const [ isLoggedIn, setIsLoggedIn ] = React.useState(false);
+    const [ serverErrorMessage, setServerErrorMessage ] = React.useState('');
+    const [ isPopupShowing, setIsPopupShowing ] = React.useState(false);
+    const [ isPreloaderShowing, setIsPreloaderShowing ] = React.useState(false);
+    const history = useHistory();
+    const location = useLocation();
 
+    React.useEffect(() => {
+        getUserInfo();
+      //eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    function handleRegister({ email, password, name }) {
+        mainApi.register({ email: email.toLowerCase(), password, name })
+            .then(() => {
+                handleLogin({ email, password });
+            })
+            .catch((err) => {
+                setServerErrorMessage(err.message);
+            })
+            .finally(() => {
+                setIsPopupShowing(true);
+            })
+    }
+
+    function handleLogin({ email, password }) {
+        setIsPreloaderShowing(true);
+        mainApi.login({ email, password })
+            .then(() => {
+                setIsLoggedIn(true);
+                getUserInfo();
+                console.log(isLoggedIn);
+            })
+            .catch((err) => {
+                setServerErrorMessage(err.message);
+            })
+            .finally(() => {
+                setIsPreloaderShowing(false);
+            })
+    }
+
+    function handleLogout() {
+            mainApi.logout()
+            .then(() => {
+                setIsLoggedIn(false);
+                history.push('/');
+            })
+            .catch((err) => {
+                handleError(err);
+            })
+            .finally(() => {
+                setIsPreloaderShowing(false);
+            })
+    }
+
+    function handleUpdateUser({ name, email }) {
+        setIsPreloaderShowing(true);
+        mainApi.setNewUserInfo({ name, email })
+          .then(() => {
+            setCurrentUser({ name, email });
+          })
+          .catch((err) => {
+            handleError(err);
+          })
+          .finally(() => {
+            setIsPreloaderShowing(false);
+        })
+    }
+
+    function getUserInfo() {
+        mainApi.getUserInfo()
+            .then((res) => {
+                const { name, email } = res;
+                setCurrentUser({ name, email });
+                setIsLoggedIn(true);
+                (location.pathname === '/signin' || location.pathname === '/signup') ? history.push('/movies') : history.push(location.pathname);
+            })
+            .catch((err) => {
+                handleError(err);
+            })
+    }
+
+    function handleError(err) {
+        if (err.status === 401) {
+            setIsLoggedIn(false);
+            localStorage.clear();
+        }
+    }
+    
     return (
-        <CurrentUserContext.Provider value={ currentUser }>
+        <CurrentUserContext.Provider value={currentUser}>
             <div className="page">
                 <Switch>
                     <Route exact path="/">
@@ -33,26 +121,34 @@ function App() {
                     <ProtectedRoute 
                         path="/movies"
                         component={Movies}
+                        isLoggedIn={isLoggedIn}
                     />
                     <ProtectedRoute
                         path="/saved-movies"
                         component={SavedMovies}
+                        isLoggedIn={isLoggedIn}
                     />
                     <ProtectedRoute
                         path="/profile" 
                         component={Profile}
+                        isLoggedIn={isLoggedIn}
+                        onLogout={handleLogout}
+                        onUpdate={handleUpdateUser}
                     />
                     <Route path="/signin">
-                        <Login />
+                        <Login
+                            onSubmit={handleLogin}                        
+                        />
                     </Route>
                     <Route path="/signup">
-                        <Register />
+                        <Register
+                            onSubmit={handleRegister}
+                        />
                     </Route>
                     <Route path="*">
                         <NotFound />
                     </Route>
                 </Switch>
-
             </div>
         </CurrentUserContext.Provider>
     );

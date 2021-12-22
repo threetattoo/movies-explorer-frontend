@@ -9,6 +9,8 @@ function Register({
         helpText,
         helpLink,
         helpLinkText,
+        handleSubmitForm,
+        isFormValid,
       }) {
     return (
         <section className="authentification">
@@ -17,9 +19,20 @@ function Register({
                 <h1 className="authentification__title">
                     {title}
                 </h1>
-                <form className="authentification__form">
+                <form
+                    className="authentification__form"
+                    onSubmit={handleSubmitForm}
+                    action="./"
+                    noValidate
+                >
                     {children}
-                    <button className="authentification__submit-button" type="submit">{buttonName}</button>
+                    <button
+                        className="authentification__submit-button"
+                        type="submit"
+                        disabled={!isFormValid}
+                    >
+                        {buttonName}
+                    </button>
                 </form>
                 <p className="authentification__help-text">
                     {helpText}
