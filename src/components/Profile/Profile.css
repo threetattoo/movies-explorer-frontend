@@ -21,7 +21,7 @@
 }
 
 .profile__wrapper {
-    margin: 123px 0 220px;
+    margin: 123px 0 172px;
 }
 
 .profile__field {
@@ -63,6 +63,17 @@
     border-bottom: 1px solid #ffffff;
 }
 
+.profile__seccess-message {
+    margin: 0 0 20px;
+    text-align: center;
+    color: #ff3055;
+    visibility: hidden;
+}
+
+.profile__seccess-message_visible {
+    visibility: visible;
+}
+
 .profile__edit-button {
     margin: 0 0 16px 0;
     padding: 0;
@@ -74,7 +85,7 @@
     background-color: transparent;
     transition: all 0.5s;
 }
-  
+ 
 .profile__edit-button:hover {
     opacity: 0.5;
 }

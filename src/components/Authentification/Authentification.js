@@ -27,7 +27,7 @@ function Register({
                 >
                     {children}
                     <button
-                        className="authentification__submit-button"
+                        className={`authentification__submit-button ${!isFormValid && "authentification__submit-button_disabled"}`}
                         type="submit"
                         disabled={!isFormValid}
                     >

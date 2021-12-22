@@ -5,7 +5,7 @@ import useFormValidator from '../FormValidator/FormValidator';
 function Register({ onSubmit }) {
     const formWithValidation = useFormValidator();
     const { name, email, password } = formWithValidation.values;
-    const { values, handleChange, errors, isFormValid, resetForm } = formWithValidation;
+    const { values, errors, isFormValid, resetForm } = formWithValidation;
 
     React.useEffect(() => {
         resetForm();
@@ -24,7 +24,7 @@ function Register({ onSubmit }) {
                 helpLink="/signin"
                 helpLinkText="Войти"
                 handleSubmitForm={handleSubmit}
-                isFormValid
+                isFormValid={isFormValid}
             >
             <div className="authentification__form-field">
                 <label className="authentification__form-label">Имя</label>
@@ -65,7 +65,7 @@ function Register({ onSubmit }) {
                     id="password-input"
                     placeholder="Пароль"
                     value={values.password || ''}
-                    onChange={handleChange}
+                    onChange={formWithValidation.handleChange}
                     required
                 />
                 <p className="authentification__form-error">{errors.password}</p>

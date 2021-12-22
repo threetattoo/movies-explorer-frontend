@@ -4,7 +4,7 @@ import Header from '../Header/Header';
 import useFormValidator from '../FormValidator/FormValidator';
 import CurrentUserContext from '../../context/CurrentUserContext';
 
-function Profile({ isLoggedIn, onLogout, onUpdate, }) {
+function Profile({ isLoggedIn, onLogout, onUpdate, isSuccessMessageShowing, setIsSuccessMessageShowing }) {
     const formWithValidation = useFormValidator();
     const { name, email } = formWithValidation.values;
     const { values, errors, isFormValid, resetForm } = formWithValidation;
@@ -12,7 +12,8 @@ function Profile({ isLoggedIn, onLogout, onUpdate, }) {
 
     React.useEffect(() => {
         resetForm();
-    }, [resetForm]);
+        setIsSuccessMessageShowing(false);
+    }, [resetForm, setIsSuccessMessageShowing]);
 
     function handleSubmitForm(evt) {
         evt.preventDefault();
@@ -66,6 +67,9 @@ function Profile({ isLoggedIn, onLogout, onUpdate, }) {
                             </div>
                             <p className="profile__field-error">{errors.email}</p>
                         </div>
+                        <p className={`profile__seccess-message ${isSuccessMessageShowing && "profile__seccess-message_visible"}`}>
+                            Данные профиля успешно изменены!
+                        </p>
                         <button
                             className="profile__edit-button"
                             type="submit"

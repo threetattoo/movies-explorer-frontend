@@ -20,7 +20,7 @@ function App() {
     const [ currentUser, setCurrentUser ] = React.useState({});
     const [ isLoggedIn, setIsLoggedIn ] = React.useState(false);
     const [ serverErrorMessage, setServerErrorMessage ] = React.useState('');
-    const [ isPopupShowing, setIsPopupShowing ] = React.useState(false);
+    const [ isSuccessMessageShowing, setIsSuccessMessageShowing ] = React.useState(false);
     const [ isPreloaderShowing, setIsPreloaderShowing ] = React.useState(false);
     const history = useHistory();
     const location = useLocation();
@@ -39,7 +39,7 @@ function App() {
                 setServerErrorMessage(err.message);
             })
             .finally(() => {
-                setIsPopupShowing(true);
+                setIsSuccessMessageShowing(true);
             })
     }
 
@@ -83,6 +83,7 @@ function App() {
             handleError(err);
           })
           .finally(() => {
+            setIsSuccessMessageShowing(true);
             setIsPreloaderShowing(false);
         })
     }
@@ -134,6 +135,8 @@ function App() {
                         isLoggedIn={isLoggedIn}
                         onLogout={handleLogout}
                         onUpdate={handleUpdateUser}
+                        isSuccessMessageShowing={isSuccessMessageShowing}
+                        setIsSuccessMessageShowing={setIsSuccessMessageShowing}
                     />
                     <Route path="/signin">
                         <Login
