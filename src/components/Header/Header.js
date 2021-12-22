@@ -3,7 +3,7 @@ import Logo from '../Logo/Logo';
 import Navigation from '../Navigation/Navigation';
 import './Header.css';
 
-function Header( { type, } ) {
+function Header( { isLoggedIn, } ) {
 
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
@@ -12,9 +12,7 @@ function Header( { type, } ) {
     }
 
     return (
-        <header className={`header ${
-                type === "auth" ? "header__authorized" : ""
-            }`}>
+        <header className={`header ${!isLoggedIn ? "header__authorized" : ""}`}>
             <Logo />
             <Navigation isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
         </header>

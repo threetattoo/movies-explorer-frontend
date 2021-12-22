@@ -27,7 +27,7 @@ function App() {
 
     React.useEffect(() => {
         getUserInfo();
-      //eslint-disable-next-line react-hooks/exhaustive-deps
+       //eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     function handleRegister({ email, password, name }) {
@@ -114,7 +114,7 @@ function App() {
                 <Switch>
                     <Route exact path="/">
                         <Header
-                            type=""
+                            isLoggedIn={isLoggedIn}
                         />
                         <Main />
                         <Footer />
