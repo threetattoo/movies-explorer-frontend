@@ -4,7 +4,9 @@ import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import useFormValidator from '../FormValidator/FormValidator';
 
 
-function SearchForm({isMoviesShort, setIsMoviesShort}) {
+function SearchForm(
+    {setSearchQuery, isMoviesShort, setIsMoviesShort,}
+) {
 
     const formWithValidation = useFormValidator();
     const { searchValue } = formWithValidation.values;
@@ -18,10 +20,18 @@ function SearchForm({isMoviesShort, setIsMoviesShort}) {
         setIsMoviesShort(!isMoviesShort);
     }
 
+    function searchFormHandler(evt) {
+        evt.preventDefault();
+        setSearchQuery(searchValue);
+    }
+
     return(
         <section className="searchform">
             <div className="searchform__wrapper">
-                <form className="searchform__search-form">
+                <form
+                    className="searchform__search-form"
+                    onSubmit={searchFormHandler}
+                >
                     <fieldset className="searchform__input-fieldset">
                         <input
                             className="search-form__input"

@@ -4,19 +4,20 @@ import MoviesCard from '../../components/MoviesCard/MoviesCard';
 import More from '../../components/More/More';
 import './MoviesCardList.css';
 
-function MoviesCardList() {
+function MoviesCardList({foundedMovies}) {
     return(
         <Switch>
             <Route path="/movies">
                 <section className="movies">
                     <ul className="movies-card__list">
-                        <MoviesCard type="saved" />
-                        <MoviesCard />
-                        <MoviesCard type="saved" />
-                        <MoviesCard />
-                        <MoviesCard type="saved" />
-                        <MoviesCard />
-                        <MoviesCard />
+                        {foundedMovies.map((movie) => {
+                            return (
+                                <MoviesCard
+                                    key={movie.movieId}
+                                    movie={movie}
+                                />
+                            )
+                        })}
                     </ul>
                     <More />
                 </section>

@@ -146,7 +146,13 @@ function App() {
             .catch(() => {
                 console.log('Ошибка API');
             })
-      }
+    }
+
+    function handleSearchByQuery(downloadedMovies, searchQuery) {
+        return downloadedMovies.filter((movie) => {
+            return movie.nameRU.toLocaleLowerCase().includes(searchQuery);
+        });
+    }
     
     return (
         <CurrentUserContext.Provider value={currentUser}>
@@ -163,6 +169,8 @@ function App() {
                         path="/movies"
                         component={Movies}
                         isLoggedIn={isLoggedIn}
+                        handleSearchByQuery={handleSearchByQuery}
+                        downloadedMovies={downloadedMovies}
                     />
                     <ProtectedRoute
                         path="/saved-movies"

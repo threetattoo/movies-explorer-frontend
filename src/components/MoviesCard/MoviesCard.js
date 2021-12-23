@@ -3,7 +3,7 @@ import './MoviesCard.css';
 import { Route, Switch } from 'react-router-dom';
 import thumb from '../../images/moviethumbs/1.png';
 
-function MoviesCard({ type, }) {
+function MoviesCard({ type, movie}) {
     return(
         <Switch>
             <Route path="/movies">
