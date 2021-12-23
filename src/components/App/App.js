@@ -15,6 +15,11 @@ import { useState, useEffect } from 'react';
 import CurrentUserContext from '../../context/CurrentUserContext';
 import ProtectedRoute from  '../ProtectedRoute/ProtectedRoute';
 import mainApi from '../../utils/MainApi';
+import moviesApi from '../../utils/MoviesApi';
+import {
+    BEATFILM_API_URL,
+    MAIN_API_URL,
+  } from '../../utils/constants';
 
 function App() {
     const [ currentUser, setCurrentUser ] = React.useState({});
@@ -22,12 +27,13 @@ function App() {
     const [ serverErrorMessage, setServerErrorMessage ] = React.useState('');
     const [ isSuccessMessageShowing, setIsSuccessMessageShowing ] = React.useState(false);
     const [ isPreloaderShowing, setIsPreloaderShowing ] = React.useState(false);
+    const [ downloadedMovies, setDownloadedMovies ] = React.useState([]);
     const history = useHistory();
     const location = useLocation();
 
     React.useEffect(() => {
         getUserInfo();
-       //eslint-disable-next-line react-hooks/exhaustive-deps
+        isMoviesDownloaded();
     }, []);
 
     function handleRegister({ email, password, name }) {
@@ -107,6 +113,40 @@ function App() {
             localStorage.clear();
         }
     }
+
+    function isMoviesDownloaded() {
+        const localMovies = localStorage.getItem('localMovies');
+        if (localMovies) {
+            setDownloadedMovies(JSON.parse(localMovies));
+        } else {
+            handleGetMovies();
+        }
+    }
+
+    function handleGetMovies() {
+        moviesApi.getMovies()
+            .then((moviesList) => {
+                const formattedMovies = moviesList.map((movie) => {
+                    return {
+                        country : movie.country,
+                        director : movie.director,
+                        duration : movie.duration,
+                        year : movie.year,
+                        description : movie.description,
+                        image: BEATFILM_API_URL + movie.image.url,
+                        trailer: movie.trailerLink,
+                        thumbnail: BEATFILM_API_URL + movie.image.formats.thumbnail.url,
+                        movieId: movie.id,
+                        nameRU : movie.nameRU,
+                        nameEN : movie.nameEN,
+                    }
+                });
+            localStorage.setItem('localMovies', JSON.stringify(formattedMovies));
+            })
+            .catch(() => {
+                console.log('Ошибка API');
+            })
+      }
     
     return (
         <CurrentUserContext.Provider value={currentUser}>
