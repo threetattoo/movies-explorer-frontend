@@ -6,13 +6,16 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
 
 function Movies() {
+    const [ searchQuery, setSearchQuery ] = React.useState([]);
+    const [isMoviesShort, setIsMoviesShort] = React.useState(false);
     return (
         <>
-            <Header
-                type="auth"
-            />
+            <Header />
             <main className="main">
-                <SearchForm />
+                <SearchForm
+                    isMoviesShort={isMoviesShort}
+                    setIsMoviesShort={setIsMoviesShort}
+                />
                 <MoviesCardList />
             </main>
             <Footer />

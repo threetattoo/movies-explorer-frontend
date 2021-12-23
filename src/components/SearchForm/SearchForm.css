@@ -47,6 +47,10 @@
     transition: 0.5s linear;
 }
 
+.search-form__submit_disabled {
+    background-color: #bcedd3;
+}
+
 .search-form__submit:hover {
     opacity: 0.8;
 }
