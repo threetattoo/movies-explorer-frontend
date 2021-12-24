@@ -29,6 +29,7 @@ function App() {
     const [ isSuccessMessageShowing, setIsSuccessMessageShowing ] = React.useState(false);
     const [ isPreloaderShowing, setIsPreloaderShowing ] = React.useState(false);
     const [ downloadedMovies, setDownloadedMovies ] = React.useState([]);
+    const [ isMoviesShort, setIsMoviesShort ] = React.useState(false);
     const history = useHistory();
     const location = useLocation();
 
@@ -150,8 +151,19 @@ function App() {
     }
 
     function handleSearchByQuery(downloadedMovies, searchQuery) {
-        return downloadedMovies.filter((movie) => {
+        const searchResult = downloadedMovies.filter((movie) => {
             return movie.nameRU.toLocaleLowerCase().includes(searchQuery);
+        });
+        if (!isMoviesShort) {
+            return searchResult;
+        } else {
+            return filterShortMovies(searchResult);
+        }
+    }
+
+    function filterShortMovies(movies) {
+        return movies.filter((movie) => {
+            return movie.duration <= 40;
         });
     }
     
@@ -172,6 +184,8 @@ function App() {
                         isLoggedIn={isLoggedIn}
                         handleSearchByQuery={handleSearchByQuery}
                         downloadedMovies={downloadedMovies}
+                        isMoviesShort={isMoviesShort}
+                        setIsMoviesShort={setIsMoviesShort}
                     />
                     <ProtectedRoute
                         path="/saved-movies"

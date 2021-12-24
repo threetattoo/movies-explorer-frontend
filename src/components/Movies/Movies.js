@@ -5,9 +5,8 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
 
-function Movies({ handleSearchByQuery, downloadedMovies, }) {
+function Movies({ isMoviesShort, setIsMoviesShort, handleSearchByQuery, downloadedMovies, }) {
     const [searchQuery, setSearchQuery] = React.useState([]);
-    const [isMoviesShort, setIsMoviesShort] = React.useState(false);
     const [foundedMovies, setFoundedMovies] = React.useState([]);
 
     React.useEffect(() => {
