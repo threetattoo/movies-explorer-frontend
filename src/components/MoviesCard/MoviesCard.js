@@ -1,9 +1,16 @@
 import React from 'react';
 import './MoviesCard.css';
 import { Route, Switch } from 'react-router-dom';
-import thumb from '../../images/moviethumbs/1.png';
 
 function MoviesCard({ type, movie}) {
+
+    function convertDuration(duration) {
+        const hours = Math.trunc(duration / 60);
+        const minutes = duration % 60;    
+        const convertedDuration = hours + 'ч ' + minutes + 'м';
+        return convertedDuration;
+    };
+
     return(
         <Switch>
             <Route path="/movies">
@@ -11,16 +18,18 @@ function MoviesCard({ type, movie}) {
                     <div className="movies-card__info">
                         <div className="movies-card__data">
                             <h2 className="movies-card__title">
-                                33 слова о дизайне
+                            {movie.nameRU}
                             </h2>
                             <span className="movies-card__duration">
-                                1ч42м
+                                {convertDuration(movie.duration)}
                             </span>
                         </div>
                         <button className={`movies-card__type-save ${type === "saved" ? "movies-card__type-save_saved" : ""}`} type="button"></button>
                     </div>
                     <div className="movies-card__thumb-wrapper">
-                        <img src={thumb} className="movies-card__thumb" alt="Обложка кинофильма" />
+                        <a href={movie.trailer}>
+                            <img src={movie.image} target="_blank" className="movies-card__thumb" alt="Обложка кинофильма" />
+                        </a>
                     </div>
                 </li>
             </Route>
@@ -38,7 +47,7 @@ function MoviesCard({ type, movie}) {
                         <button className="movies-card__type-save movies-card__type-delete" type="button"></button>
                     </div>
                     <div className="movies-card__thumb-wrapper">
-                        <img src={thumb} className="movies-card__thumb" alt="Обложка кинофильма" />
+                        <img src={movie.image} className="movies-card__thumb" alt="Обложка кинофильма" />
                     </div>
                 </li>
             </Route>

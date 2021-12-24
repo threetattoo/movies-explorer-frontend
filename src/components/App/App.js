@@ -19,7 +19,8 @@ import moviesApi from '../../utils/MoviesApi';
 import {
     BEATFILM_API_URL,
     MAIN_API_URL,
-  } from '../../utils/constants';
+    BEATFILM_DOMAIN_URL,
+} from '../../utils/constants';
 
 function App() {
     const [ currentUser, setCurrentUser ] = React.useState({});
@@ -133,9 +134,9 @@ function App() {
                         duration : movie.duration,
                         year : movie.year,
                         description : movie.description,
-                        image: BEATFILM_API_URL + movie.image.url,
+                        image: BEATFILM_DOMAIN_URL + movie.image.url,
                         trailer: movie.trailerLink,
-                        thumbnail: BEATFILM_API_URL + movie.image.formats.thumbnail.url,
+                        thumbnail: BEATFILM_DOMAIN_URL + movie.image.formats.thumbnail.url,
                         movieId: movie.id,
                         nameRU : movie.nameRU,
                         nameEN : movie.nameEN,
