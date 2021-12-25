@@ -30,12 +30,14 @@ function App() {
     const [ isPreloaderShowing, setIsPreloaderShowing ] = React.useState(false);
     const [ downloadedMovies, setDownloadedMovies ] = React.useState([]);
     const [ isMoviesShort, setIsMoviesShort ] = React.useState(false);
+    const [ savedMovies, setSavedMovies ] = React.useState([]);
     const history = useHistory();
     const location = useLocation();
 
     React.useEffect(() => {
         getUserInfo();
         isMoviesDownloaded();
+        handleGetSavedMovies()
     }, []);
 
     function handleRegister({ email, password, name }) {
@@ -166,6 +168,55 @@ function App() {
             return movie.duration <= 40;
         });
     }
+
+    function handleGetSavedMovies() {
+        mainApi.getMovies()
+            .then((movies) => {
+                setSavedMovies(movies.slice().reverse());
+            })
+            .catch((err) => {
+                console.log('Ошибка при загрузке сохраненных фильмов.');
+                handleError(err);
+            })
+    }
+    
+    function handleSaveMovie(movie) {
+        mainApi.saveMovie(movie)
+            .then((savedMovie) => {
+                setSavedMovies([savedMovie, ...savedMovies]);
+            })
+            .catch((err) => {
+                console.log('Ошибка при сохранении фильма.');
+                handleError(err);
+            })
+    }
+
+    function handleDeleteMovie(_id) {
+        mainApi.deleteMovie(_id)
+            .then(() => {
+                const tempSavedMovies = savedMovies.filter((movie) => movie._id !== _id);
+                setSavedMovies(tempSavedMovies);
+            })
+            .catch((err) => {
+                console.log('Ошибка при удалении фильма.');
+                handleError(err);
+            })
+    }
+
+    function checkIsMovieSaved(movie) {
+        const isSaved = savedMovies.some((item) => (item.movieId === movie.movieId));   
+        return isSaved;
+    };
+
+    function handleLikeMovie(movie) {
+        const isSaved = checkIsMovieSaved(movie);
+    
+        if (!isSaved) {
+            handleSaveMovie(movie);
+        } else {
+            handleDeleteMovie(movie);
+        }
+    };
     
     return (
         <CurrentUserContext.Provider value={currentUser}>
@@ -186,6 +237,11 @@ function App() {
                         downloadedMovies={downloadedMovies}
                         isMoviesShort={isMoviesShort}
                         setIsMoviesShort={setIsMoviesShort}
+                        handleSaveMovie={handleSaveMovie}
+                        handleDeleteMovie={handleDeleteMovie}
+                        handleLikeMovie={handleLikeMovie}
+                        savedMovies={savedMovies}
+                        checkIsMovieSaved={checkIsMovieSaved}
                     />
                     <ProtectedRoute
                         path="/saved-movies"

@@ -5,7 +5,8 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
 
-function Movies({ isMoviesShort, setIsMoviesShort, handleSearchByQuery, downloadedMovies, }) {
+function Movies(
+    { isMoviesShort, setIsMoviesShort, handleSearchByQuery, downloadedMovies, savedMovies, checkIsMovieSaved, handleSaveMovie, handleDeleteMovie, handleLikeMovie }) {
     const [searchQuery, setSearchQuery] = React.useState([]);
     const [foundedMovies, setFoundedMovies] = React.useState([]);
 
@@ -16,7 +17,6 @@ function Movies({ isMoviesShort, setIsMoviesShort, handleSearchByQuery, download
     function handleMoviesSearch() {
         if (searchQuery.length > 0) {
             setFoundedMovies(handleSearchByQuery(downloadedMovies, searchQuery));
-            console.log(foundedMovies);
         }
     }
     return (
@@ -31,6 +31,11 @@ function Movies({ isMoviesShort, setIsMoviesShort, handleSearchByQuery, download
                 />
                 <MoviesCardList 
                     foundedMovies={foundedMovies}
+                    savedMovies={savedMovies}
+                    checkIsMovieSaved={checkIsMovieSaved}
+                    handleSaveMovie={handleSaveMovie}
+                    handleDeleteMovie={handleDeleteMovie}
+                    handleLikeMovie={handleLikeMovie}
                 />
             </main>
             <Footer />

@@ -1,14 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './MoviesCard.css';
 import { Route, Switch } from 'react-router-dom';
 
-function MoviesCard({ type, movie}) {
+function MoviesCard({ movie, savedMovies, checkIsMovieSaved, handleSaveMovie, handleDeleteMovie, handleLikeMovie }) {
+
+    const [isSaved, setIsSaved] = useState(false);
 
     function convertDuration(duration) {
         const hours = Math.trunc(duration / 60);
         const minutes = duration % 60;    
         const convertedDuration = hours + 'ч ' + minutes + 'м';
         return convertedDuration;
+    };
+
+    const isMovieSaved = checkIsMovieSaved(movie);
+
+    useEffect(() => {
+        if (isMovieSaved) {
+            setIsSaved(true);
+        } else {
+            setIsSaved(false);
+        }
+    }, []);
+
+    function handleLikeClick() {
+        setIsSaved(!isSaved);   
+        handleLikeMovie(movie);
     };
 
     return(
@@ -24,7 +41,12 @@ function MoviesCard({ type, movie}) {
                                 {convertDuration(movie.duration)}
                             </span>
                         </div>
-                        <button className={`movies-card__type-save ${type === "saved" ? "movies-card__type-save_saved" : ""}`} type="button"></button>
+                        <button
+                            className={`movies-card__type-save ${isSaved ? "movies-card__type-save_saved" : ""}`}
+                            type="button"
+                            onClick={handleLikeClick}
+                        >
+                        </button>
                     </div>
                     <div className="movies-card__thumb-wrapper">
                         <a href={movie.trailer}>
