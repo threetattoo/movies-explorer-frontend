@@ -12,7 +12,7 @@ function MoviesCard({ movie, savedMovies, checkIsMovieSaved, handleSaveMovie, ha
         const convertedDuration = hours + 'ч ' + minutes + 'м';
         return convertedDuration;
     };
-
+    
     const isMovieSaved = checkIsMovieSaved(movie);
 
     useEffect(() => {
@@ -27,7 +27,28 @@ function MoviesCard({ movie, savedMovies, checkIsMovieSaved, handleSaveMovie, ha
         setIsSaved(!isSaved);   
         handleLikeMovie(movie);
     };
-
+    
+    /*
+    let isSaved = false;
+    let savedMovie;
+    isSaved = savedMovies.some((item) => {
+        if (item.movieId === movie.movieId) {
+            savedMovie = item;
+            return true;
+        }
+        return false;
+    });
+    */
+    
+    useEffect(() => {
+        if (isMovieSaved) {
+            setIsSaved(true);
+        } else {
+            setIsSaved(false);
+        }
+    }, []);
+    
+    
     return(
         <Switch>
             <Route path="/movies">

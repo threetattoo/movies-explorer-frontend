@@ -6,7 +6,18 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
 
 function Movies(
-    { isMoviesShort, setIsMoviesShort, handleSearchByQuery, downloadedMovies, savedMovies, checkIsMovieSaved, handleSaveMovie, handleDeleteMovie, handleLikeMovie }) {
+    { 
+        isMoviesShort,
+        setIsMoviesShort,
+        handleSearchByQuery,
+        downloadedMovies,
+        savedMovies,
+        checkIsMovieSaved,
+        handleSaveMovie,
+        handleDeleteMovie,
+        handleLikeMovie,
+    }
+) {
     const [searchQuery, setSearchQuery] = React.useState([]);
     const [foundedMovies, setFoundedMovies] = React.useState([]);
 

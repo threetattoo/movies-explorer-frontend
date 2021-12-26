@@ -34,7 +34,8 @@ function MoviesCardList({ foundedMovies, savedMovies, handleSaveMovie, handleDel
             setNumberOfCardsToShow(numberOfCardsToShow + 5);
         }
     }
-    console.log(numberOfCardsToShow);
+    //Выводим в консоль, сколько карточек показывть
+    //console.log(numberOfCardsToShow);
     return(
         <Switch>
             <Route path="/movies">

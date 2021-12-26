@@ -34,12 +34,6 @@ function App() {
     const history = useHistory();
     const location = useLocation();
 
-    React.useEffect(() => {
-        getUserInfo();
-        isMoviesDownloaded();
-        handleGetSavedMovies()
-    }, []);
-
     function handleRegister({ email, password, name }) {
         mainApi.register({ email: email.toLowerCase(), password, name })
             .then(() => {
@@ -57,9 +51,7 @@ function App() {
         setIsPreloaderShowing(true);
         mainApi.login({ email, password })
             .then(() => {
-                setIsLoggedIn(true);
                 getUserInfo();
-                console.log(isLoggedIn);
             })
             .catch((err) => {
                 setServerErrorMessage(err.message);
@@ -101,12 +93,13 @@ function App() {
     function getUserInfo() {
         mainApi.getUserInfo()
             .then((res) => {
-                const { name, email } = res;
-                setCurrentUser({ name, email });
+                const { name, email, _id } = res;
+                setCurrentUser({ name, email, _id });
                 setIsLoggedIn(true);
                 (location.pathname === '/signin' || location.pathname === '/signup') ? history.push('/movies') : history.push(location.pathname);
             })
             .catch((err) => {
+                console.log('Не получилось получить данные пользователя');
                 handleError(err);
             })
     }
@@ -172,13 +165,15 @@ function App() {
     function handleGetSavedMovies() {
         mainApi.getMovies()
             .then((movies) => {
-                setSavedMovies(movies.slice().reverse());
+                setSavedMovies(movies.slice().reverse().filter((item) => item.owner === currentUser._id));
             })
             .catch((err) => {
                 console.log('Ошибка при загрузке сохраненных фильмов.');
                 handleError(err);
             })
     }
+
+    //console.log(savedMovies);
     
     function handleSaveMovie(movie) {
         mainApi.saveMovie(movie)
@@ -190,15 +185,17 @@ function App() {
                 handleError(err);
             })
     }
-
-    function handleDeleteMovie(_id) {
-        mainApi.deleteMovie(_id)
+    
+    function handleDeleteMovie(movie) {
+        const savedMovie = savedMovies.find((item) => item.movieId === movie.movieId);
+        mainApi.deleteMovie(savedMovie)
             .then(() => {
-                const tempSavedMovies = savedMovies.filter((movie) => movie._id !== _id);
+                const tempSavedMovies = savedMovies.filter((item) => item._id !== savedMovie._id);
                 setSavedMovies(tempSavedMovies);
             })
             .catch((err) => {
                 console.log('Ошибка при удалении фильма.');
+                console.log(err);
                 handleError(err);
             })
     }
@@ -210,7 +207,6 @@ function App() {
 
     function handleLikeMovie(movie) {
         const isSaved = checkIsMovieSaved(movie);
-    
         if (!isSaved) {
             handleSaveMovie(movie);
         } else {
@@ -218,6 +214,17 @@ function App() {
         }
     };
     
+    React.useEffect(() => {
+        if (isLoggedIn) {
+            handleGetSavedMovies();
+            isMoviesDownloaded();
+        }
+    }, [isLoggedIn]);
+    
+    React.useEffect(() => {
+            getUserInfo();
+    }, []);
+
     return (
         <CurrentUserContext.Provider value={currentUser}>
             <div className="page">
