@@ -3,7 +3,16 @@ import { Route, Switch } from 'react-router-dom';
 import MoviesCard from '../../components/MoviesCard/MoviesCard';
 import './MoviesCardList.css';
 
-function MoviesCardList({ foundedMovies, savedMovies, handleSaveMovie, handleDeleteMovie, checkIsMovieSaved, handleLikeMovie }) {
+function MoviesCardList(
+    {
+        foundedMovies,
+        savedMovies,
+        handleSaveMovie,
+        handleDeleteMovie,
+        checkIsMovieSaved,
+        handleLikeMovie,
+    }
+) {
     const [numberOfCardsToShow, setNumberOfCardsToShow] = useState(0);
 
     const numberOfInitialCards = () => {
@@ -69,9 +78,25 @@ function MoviesCardList({ foundedMovies, savedMovies, handleSaveMovie, handleDel
             </Route>
             <Route path="/saved-movies">
                 <section className="movies movies_saved">
+                {foundedMovies && (
+                    <>
                     <ul className="movies-card__list">
-
-                    </ul>
+                        {foundedMovies.map((movie) => {
+                            return (
+                                <MoviesCard
+                                    key={movie.movieId}
+                                    movie={movie}
+                                    savedMovies={savedMovies}
+                                    checkIsMovieSaved={checkIsMovieSaved}
+                                    handleSaveMovie={handleSaveMovie}
+                                    handleDeleteMovie={handleDeleteMovie}
+                                    handleLikeMovie={handleLikeMovie}
+                                />
+                            )
+                        })}
+                        </ul>
+                        </>
+                    )}
                 </section>
             </Route>
         </Switch>

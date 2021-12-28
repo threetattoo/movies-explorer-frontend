@@ -144,9 +144,20 @@ function App() {
                 console.log('Ошибка API');
             })
     }
-
+    /*
     function handleSearchByQuery(downloadedMovies, searchQuery) {
         const searchResult = downloadedMovies.filter((movie) => {
+            return movie.nameRU.toLocaleLowerCase().includes(searchQuery);
+        });
+        if (!isMoviesShort) {
+            return searchResult;
+        } else {
+            return filterShortMovies(searchResult);
+        }
+    }
+    */
+    function handleSearchByQuery(data, searchQuery) {
+        const searchResult = data.filter((movie) => {
             return movie.nameRU.toLocaleLowerCase().includes(searchQuery);
         });
         if (!isMoviesShort) {
@@ -195,7 +206,6 @@ function App() {
             })
             .catch((err) => {
                 console.log('Ошибка при удалении фильма.');
-                console.log(err);
                 handleError(err);
             })
     }
@@ -254,6 +264,15 @@ function App() {
                         path="/saved-movies"
                         component={SavedMovies}
                         isLoggedIn={isLoggedIn}
+                        handleSearchByQuery={handleSearchByQuery}
+                        downloadedMovies={downloadedMovies}
+                        isMoviesShort={isMoviesShort}
+                        setIsMoviesShort={setIsMoviesShort}
+                        handleSaveMovie={handleSaveMovie}
+                        handleDeleteMovie={handleDeleteMovie}
+                        handleLikeMovie={handleLikeMovie}
+                        savedMovies={savedMovies}
+                        checkIsMovieSaved={checkIsMovieSaved}
                     />
                     <ProtectedRoute
                         path="/profile" 
