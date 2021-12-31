@@ -44,11 +44,8 @@ function MoviesCardList(
     }, []);
 
     useEffect(() => {
-        if (isMoviesShort) {
-            setRenderMovies(filterShortMovies(findedMovies));
-        } else {
-            setRenderMovies(findedMovies);
-        }
+        (isMoviesShort) ? setRenderMovies(filterShortMovies(findedMovies)) : setRenderMovies(findedMovies);
+        numberOfInitialCards();
     }, [filterShortMovies, findedMovies, isMoviesShort]);
 
     function handleClickMore() {
