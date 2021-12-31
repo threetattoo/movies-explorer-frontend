@@ -49,6 +49,7 @@ function SearchForm(
                         >
                         </button>
                     </fieldset>
+                    <p className="searchform__error">{errors.searchValue}</p>
                     <FilterCheckbox
                         isMoviesShort={isMoviesShort}
                         setIsMoviesShort={setIsMoviesShort}

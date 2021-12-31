@@ -4,13 +4,21 @@ import Header from '../Header/Header';
 import useFormValidator from '../FormValidator/FormValidator';
 import CurrentUserContext from '../../context/CurrentUserContext';
 
-function Profile({ isLoggedIn, onLogout, onUpdate, isSuccessMessageShowing, setIsSuccessMessageShowing }) {
+function Profile(
+    {
+        onLogout,
+        onUpdate,
+        isSuccessMessageShowing,
+        setIsSuccessMessageShowing,
+    }
+) {
     const formWithValidation = useFormValidator();
     const { name, email } = formWithValidation.values;
-    const { values, errors, isFormValid, resetForm } = formWithValidation;
+    const { values, errors, isFormValid, resetForm, setValues } = formWithValidation;
     const currentUser = React.useContext(CurrentUserContext);
-
+    
     React.useEffect(() => {
+        setValues(currentUser);
         resetForm();
         setIsSuccessMessageShowing(false);
     }, [resetForm, setIsSuccessMessageShowing]);
@@ -19,12 +27,17 @@ function Profile({ isLoggedIn, onLogout, onUpdate, isSuccessMessageShowing, setI
         evt.preventDefault();
         onUpdate({ name, email });
     }
+
+    function formStatus() {
+        let isDataSame = (values.name === currentUser.name) && (values.email === currentUser.email);
+        return (!isDataSame && isFormValid);
+    }
     
+    let disabledStatus = formStatus();
+
     return (
         <>
-            <Header
-                type="auth"
-            />
+            <Header />
             <main className="main">
                 <section className="profile">
                     <h1 className="profile__hello">
@@ -73,7 +86,7 @@ function Profile({ isLoggedIn, onLogout, onUpdate, isSuccessMessageShowing, setI
                         <button
                             className="profile__edit-button"
                             type="submit"
-                            disabled={!isFormValid}
+                            disabled={!disabledStatus}
                             onClick={handleSubmitForm}
                         >
                             Редактировать
@@ -93,3 +106,4 @@ function Profile({ isLoggedIn, onLogout, onUpdate, isSuccessMessageShowing, setI
 }
 
 export default Profile;
+

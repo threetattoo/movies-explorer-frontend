@@ -35,6 +35,7 @@ function App() {
     const location = useLocation();
 
     function handleRegister({ email, password, name }) {
+        setIsPreloaderShowing(true);
         mainApi.register({ email: email.toLowerCase(), password, name })
             .then(() => {
                 handleLogin({ email, password });
@@ -44,6 +45,7 @@ function App() {
             })
             .finally(() => {
                 setIsSuccessMessageShowing(true);
+                setIsPreloaderShowing(false);
             })
     }
 
@@ -62,7 +64,8 @@ function App() {
     }
 
     function handleLogout() {
-            mainApi.logout()
+        setIsPreloaderShowing(true);
+        mainApi.logout()
             .then(() => {
                 setIsLoggedIn(false);
                 history.push('/');
@@ -144,21 +147,10 @@ function App() {
                 console.log('Ошибка API');
             })
     }
-    /*
-    function handleSearchByQuery(downloadedMovies, searchQuery) {
-        const searchResult = downloadedMovies.filter((movie) => {
-            return movie.nameRU.toLocaleLowerCase().includes(searchQuery);
-        });
-        if (!isMoviesShort) {
-            return searchResult;
-        } else {
-            return filterShortMovies(searchResult);
-        }
-    }
-    */
+
     function handleSearchByQuery(data, searchQuery) {
         const searchResult = data.filter((movie) => {
-            return movie.nameRU.toLocaleLowerCase().includes(searchQuery);
+            return movie.nameRU.toLocaleLowerCase().includes(searchQuery.toLocaleLowerCase());
         });
         if (!isMoviesShort) {
             return searchResult;
@@ -174,6 +166,7 @@ function App() {
     }
 
     function handleGetSavedMovies() {
+        setIsPreloaderShowing(true);
         mainApi.getMovies()
             .then((movies) => {
                 setSavedMovies(movies.slice().reverse().filter((item) => item.owner === currentUser._id));
@@ -181,6 +174,9 @@ function App() {
             .catch((err) => {
                 console.log('Ошибка при загрузке сохраненных фильмов.');
                 handleError(err);
+            })
+            .finally(() => {
+                setIsPreloaderShowing(false);
             })
     }
 
@@ -254,11 +250,13 @@ function App() {
                         downloadedMovies={downloadedMovies}
                         isMoviesShort={isMoviesShort}
                         setIsMoviesShort={setIsMoviesShort}
+                        filterShortMovies={filterShortMovies}
                         handleSaveMovie={handleSaveMovie}
                         handleDeleteMovie={handleDeleteMovie}
                         handleLikeMovie={handleLikeMovie}
                         savedMovies={savedMovies}
                         checkIsMovieSaved={checkIsMovieSaved}
+                        isPreloaderShowing={isPreloaderShowing}
                     />
                     <ProtectedRoute
                         path="/saved-movies"
@@ -268,11 +266,13 @@ function App() {
                         downloadedMovies={downloadedMovies}
                         isMoviesShort={isMoviesShort}
                         setIsMoviesShort={setIsMoviesShort}
+                        filterShortMovies={filterShortMovies}
                         handleSaveMovie={handleSaveMovie}
                         handleDeleteMovie={handleDeleteMovie}
                         handleLikeMovie={handleLikeMovie}
                         savedMovies={savedMovies}
                         checkIsMovieSaved={checkIsMovieSaved}
+                        isPreloaderShowing={isPreloaderShowing}
                     />
                     <ProtectedRoute
                         path="/profile" 

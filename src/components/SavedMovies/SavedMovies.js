@@ -10,6 +10,7 @@ function SavedMovies({
     handleSearchByQuery,
     downloadedMovies,
     savedMovies,
+    filterShortMovies,
     checkIsMovieSaved,
     handleSaveMovie,
     handleDeleteMovie,
@@ -17,20 +18,19 @@ function SavedMovies({
 }) {
 
     const [searchQuery, setSearchQuery] = React.useState([]);
-    const [foundedMovies, setFoundedMovies] = React.useState([]);
+    const [findedMovies, setFindedMovies] = React.useState([]);
 
     React.useEffect(() => {
         handleMoviesSearch();
     }, [searchQuery]);
 
     React.useEffect(() => {
-        setFoundedMovies(savedMovies);
+        setFindedMovies(savedMovies);
     }, [savedMovies]);
-
-    console.log(savedMovies);
+    
     function handleMoviesSearch() {
         if (searchQuery.length > 0) {
-            setFoundedMovies(handleSearchByQuery(savedMovies, searchQuery));
+            setFindedMovies(handleSearchByQuery(savedMovies, searchQuery));
         }
     }
     return (
@@ -44,7 +44,10 @@ function SavedMovies({
                     setIsMoviesShort={setIsMoviesShort}
                 />
                 <MoviesCardList
-                    foundedMovies={foundedMovies}
+                    isMoviesShort={isMoviesShort}
+                    filterShortMovies={filterShortMovies}
+                    findedMovies={findedMovies}
+                    setFindedMovies={setFindedMovies}
                     handleSearchByQuery={handleSearchByQuery}
                     downloadedMovies={downloadedMovies}
                     savedMovies={savedMovies}
