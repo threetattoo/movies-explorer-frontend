@@ -10,7 +10,7 @@ function SearchForm(
 
     const formWithValidation = useFormValidator();
     const { searchValue } = formWithValidation.values;
-    const { values, errors, isFormValid, resetForm } = formWithValidation;
+    const { errors, isFormValid, resetForm } = formWithValidation;
 
     React.useEffect(() => {
         resetForm();
@@ -18,6 +18,7 @@ function SearchForm(
 
     function changeMoviesType(e) {
         setIsMoviesShort(!isMoviesShort);
+        localStorage.setItem('isShortStatus', JSON.stringify(isMoviesShort));
     }
 
     function searchFormHandler(evt) {

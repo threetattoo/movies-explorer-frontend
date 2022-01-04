@@ -4,7 +4,9 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
 
-function SavedMovies({ 
+function SavedMovies({
+    findedMovies,
+    setFindedMovies,
     isMoviesShort,
     setIsMoviesShort,
     handleSearchByQuery,
@@ -17,8 +19,8 @@ function SavedMovies({
     handleLikeMovie,
 }) {
 
-    const [searchQuery, setSearchQuery] = React.useState([]);
-    const [findedMovies, setFindedMovies] = React.useState([]);
+    const [searchQuery, setSearchQuery] = React.useState('');
+    //const [findedMovies, setFindedMovies] = React.useState([]);
 
     React.useEffect(() => {
         handleMoviesSearch();
@@ -29,7 +31,7 @@ function SavedMovies({
     }, [savedMovies]);
     
     function handleMoviesSearch() {
-        if (searchQuery.length > 0) {
+        if (searchQuery) {
             setFindedMovies(handleSearchByQuery(savedMovies, searchQuery));
         }
     }

@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import { Route, Switch } from 'react-router-dom';
+import React, {useState, useEffect, useCallback} from 'react';
+import { Route, Switch, useLocation } from 'react-router-dom';
 import MoviesCard from '../../components/MoviesCard/MoviesCard';
 import './MoviesCardList.css';
 import Preloader from "../Preloader/Preloader";
@@ -7,10 +7,8 @@ import Preloader from "../Preloader/Preloader";
 function MoviesCardList(
     {
         isMoviesShort,
-        handleSearchByQuery,
         filterShortMovies,
         findedMovies,
-        setFindedMovies,
         savedMovies,
         handleSaveMovie,
         handleDeleteMovie,
@@ -21,6 +19,7 @@ function MoviesCardList(
 ) {
     const [numberOfCardsToShow, setNumberOfCardsToShow] = useState(0);
     const [renderMovies, setRenderMovies] = useState([]);
+    const location = useLocation();
     
     const numberOfInitialCards = () => {
         if (window.innerWidth > 570) {
@@ -42,11 +41,21 @@ function MoviesCardList(
             window.removeEventListener('resize', numberOfInitialCards);
         };
     }, []);
+    
+    const setTypeOfMovies = useCallback(() => {
+        (isMoviesShort) ? setRenderMovies(filterShortMovies(findedMovies)) : setRenderMovies(findedMovies);
+    }, [filterShortMovies, findedMovies, isMoviesShort]);
+    
+    const setLastSearchMovies = useCallback(() => {
+        if (findedMovies.length > 0  && location.pathname === "/movies") {
+            localStorage.setItem('lastSearchMovies', JSON.stringify(findedMovies));
+        }
+    }, [findedMovies, location.pathname]);
 
     useEffect(() => {
-        (isMoviesShort) ? setRenderMovies(filterShortMovies(findedMovies)) : setRenderMovies(findedMovies);
-        numberOfInitialCards();
-    }, [filterShortMovies, findedMovies, isMoviesShort]);
+        setTypeOfMovies();
+        setLastSearchMovies();
+    }, [setLastSearchMovies, setTypeOfMovies]);
 
     function handleClickMore() {
         if (window.innerWidth >= 570) {

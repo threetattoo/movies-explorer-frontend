@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useEffect, } from 'react';
 import './Movies.css';
 import Header from '../Header/Header';
 import SearchForm from '../SearchForm/SearchForm';
@@ -8,6 +8,8 @@ import Footer from '../Footer/Footer';
 function Movies(
     { 
         isMoviesShort,
+        findedMovies,
+        setFindedMovies,
         setIsMoviesShort,
         filterShortMovies,
         handleSearchByQuery,
@@ -20,19 +22,33 @@ function Movies(
         isPreloaderShowing,
     }
 ) {
-    const [searchQuery, setSearchQuery] = React.useState([]);
-    const [findedMovies, setFindedMovies] = React.useState([]);
-
-    React.useEffect(() => {
-        handleMoviesSearch();
-    }, [searchQuery]);  
-
-    function handleMoviesSearch() {
-        if (searchQuery.length > 0) {
-            setFindedMovies(handleSearchByQuery(downloadedMovies, searchQuery));
-        }
-    }
+    const [ searchQuery, setSearchQuery ] = React.useState('');
+    const [ isFirstRequest, setIsFirstRequest ] = React.useState(true);
     
+    const handleMoviesSearch = useCallback(() => {
+        if (searchQuery) {
+            setFindedMovies(handleSearchByQuery(downloadedMovies, searchQuery));
+            setIsFirstRequest(false);
+        }
+    }, [downloadedMovies, handleSearchByQuery, searchQuery, setFindedMovies]);
+    
+    useEffect(() => {
+        handleMoviesSearch();
+    }, [handleMoviesSearch]);  
+    
+    const setMoviesFromLastSearch = useCallback(() => {
+        const getLastSearchMovies = localStorage.getItem('lastSearchMovies');
+        if (getLastSearchMovies && isFirstRequest) {
+            setFindedMovies(JSON.parse(getLastSearchMovies));
+        } else {
+            console.log('Фильмы из последнего запроса не установлены');
+        }
+    }, [isFirstRequest, setFindedMovies]);
+    
+    useEffect(() => {
+        setMoviesFromLastSearch();
+    }, [setMoviesFromLastSearch]);  
+
     return (
         <>
             <Header />
@@ -45,10 +61,8 @@ function Movies(
                 />
                 <MoviesCardList
                     isMoviesShort={isMoviesShort}
-                    handleSearchByQuery={handleSearchByQuery}
                     filterShortMovies={filterShortMovies}
                     findedMovies={findedMovies}
-                    setFoundedMovies={setFindedMovies}
                     savedMovies={savedMovies}
                     checkIsMovieSaved={checkIsMovieSaved}
                     handleSaveMovie={handleSaveMovie}

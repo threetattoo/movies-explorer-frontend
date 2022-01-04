@@ -31,6 +31,7 @@ function App() {
     const [ downloadedMovies, setDownloadedMovies ] = React.useState([]);
     const [ isMoviesShort, setIsMoviesShort ] = React.useState(false);
     const [ savedMovies, setSavedMovies ] = React.useState([]);
+    const [ findedMovies, setFindedMovies ] = React.useState([]);
     const history = useHistory();
     const location = useLocation();
 
@@ -179,8 +180,6 @@ function App() {
                 setIsPreloaderShowing(false);
             })
     }
-
-    //console.log(savedMovies);
     
     function handleSaveMovie(movie) {
         mainApi.saveMovie(movie)
@@ -230,7 +229,7 @@ function App() {
     React.useEffect(() => {
             getUserInfo();
     }, []);
-
+    
     return (
         <CurrentUserContext.Provider value={currentUser}>
             <div className="page">
@@ -246,6 +245,8 @@ function App() {
                         path="/movies"
                         component={Movies}
                         isLoggedIn={isLoggedIn}
+                        findedMovies={findedMovies}
+                        setFindedMovies={setFindedMovies}
                         handleSearchByQuery={handleSearchByQuery}
                         downloadedMovies={downloadedMovies}
                         isMoviesShort={isMoviesShort}
@@ -262,6 +263,8 @@ function App() {
                         path="/saved-movies"
                         component={SavedMovies}
                         isLoggedIn={isLoggedIn}
+                        findedMovies={findedMovies}
+                        setFindedMovies={setFindedMovies}
                         handleSearchByQuery={handleSearchByQuery}
                         downloadedMovies={downloadedMovies}
                         isMoviesShort={isMoviesShort}
