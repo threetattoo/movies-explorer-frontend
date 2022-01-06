@@ -3,7 +3,7 @@ import './Login.css';
 import Authentification from '../Authentification/Authentification';
 import useFormValidator from '../FormValidator/FormValidator';
 
-function Login({ onSubmit }) {
+function Login({ onSubmit, serverErrorMessage }) {
     const formWithValidation = useFormValidator();
     const { email, password } = formWithValidation.values;
     const { values, errors, isFormValid, resetForm } = formWithValidation;
@@ -26,6 +26,7 @@ function Login({ onSubmit }) {
             helpLinkText="Регистрация"
             handleSubmitForm={handleSubmit}
             isFormValid={isFormValid}
+            serverErrorMessage={serverErrorMessage}
         >
         <div className="authentification__form-field">
             <label className="authentification__form-label">E-mail</label>

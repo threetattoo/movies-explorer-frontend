@@ -2,7 +2,7 @@ import React from 'react';
 import Authentification from '../Authentification/Authentification';
 import useFormValidator from '../FormValidator/FormValidator';
 
-function Register({ onSubmit }) {
+function Register({ onSubmit, serverErrorMessage }) {
     const formWithValidation = useFormValidator();
     const { name, email, password } = formWithValidation.values;
     const { values, errors, isFormValid, resetForm } = formWithValidation;
@@ -25,6 +25,7 @@ function Register({ onSubmit }) {
                 helpLinkText="Войти"
                 handleSubmitForm={handleSubmit}
                 isFormValid={isFormValid}
+                serverErrorMessage={serverErrorMessage}
             >
             <div className="authentification__form-field">
                 <label className="authentification__form-label">Имя</label>

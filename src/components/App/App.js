@@ -9,7 +9,6 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import NotFound from '../NotFound/NotFound';
 import Footer from '../Footer/Footer';
-import Preloader from '../Preloader/Preloader';
 import { Route, Switch, useLocation, useHistory } from 'react-router-dom';
 import CurrentUserContext from '../../context/CurrentUserContext';
 import ProtectedRoute from  '../ProtectedRoute/ProtectedRoute';
@@ -283,11 +282,13 @@ function App() {
                     />
                     <Route path="/signin">
                         <Login
+                            serverErrorMessage={serverErrorMessage}
                             onSubmit={handleLogin}                        
                         />
                     </Route>
                     <Route path="/signup">
                         <Register
+                            serverErrorMessage={serverErrorMessage}
                             onSubmit={handleRegister}
                         />
                     </Route>

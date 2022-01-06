@@ -11,6 +11,7 @@ function Register({
         helpLinkText,
         handleSubmitForm,
         isFormValid,
+        serverErrorMessage,
       }) {
     return (
         <section className="authentification">
@@ -37,6 +38,9 @@ function Register({
                 <p className="authentification__help-text">
                     {helpText}
                     <a className="link authentification__help-link" href={helpLink}>{helpLinkText}</a>
+                </p>
+                <p className="authentification__server-error">
+                    { serverErrorMessage }
                 </p>
             </div>
         </section>
