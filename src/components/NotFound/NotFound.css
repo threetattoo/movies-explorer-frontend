@@ -27,6 +27,9 @@
     line-height: 17px;
     color: #2BE080;
     text-decoration: none;
+    border-width: 0;
+    background-color: #ffffff;
+    padding: 0;
 }
 
 @media screen and (max-width: 425px) {
