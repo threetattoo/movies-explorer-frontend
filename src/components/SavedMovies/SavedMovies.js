@@ -5,8 +5,6 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
 
 function SavedMovies({
-    findedMovies,
-    setFindedMovies,
     isMoviesShort,
     setIsMoviesShort,
     handleSearchByQuery,
@@ -19,11 +17,12 @@ function SavedMovies({
     handleLikeMovie,
 }) {
 
-    const [searchQuery, setSearchQuery] = React.useState('');
-    //const [findedMovies, setFindedMovies] = React.useState([]);
+    const [ searchQuery, setSearchQuery ] = React.useState('');
+    const [ findedMovies, setFindedMovies ] = React.useState([]);
 
     React.useEffect(() => {
         handleMoviesSearch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [searchQuery]);
 
     React.useEffect(() => {
@@ -46,6 +45,7 @@ function SavedMovies({
                     setIsMoviesShort={setIsMoviesShort}
                 />
                 <MoviesCardList
+                    searchQuery={searchQuery}
                     isMoviesShort={isMoviesShort}
                     filterShortMovies={filterShortMovies}
                     findedMovies={findedMovies}

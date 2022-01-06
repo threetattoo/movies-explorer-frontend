@@ -8,8 +8,6 @@ import Footer from '../Footer/Footer';
 function Movies(
     { 
         isMoviesShort,
-        findedMovies,
-        setFindedMovies,
         setIsMoviesShort,
         filterShortMovies,
         handleSearchByQuery,
@@ -24,30 +22,50 @@ function Movies(
 ) {
     const [ searchQuery, setSearchQuery ] = React.useState('');
     const [ isFirstRequest, setIsFirstRequest ] = React.useState(true);
+    const [ findedMovies, setFindedMovies ] = React.useState([]);
     
     const handleMoviesSearch = useCallback(() => {
         if (searchQuery) {
             setFindedMovies(handleSearchByQuery(downloadedMovies, searchQuery));
             setIsFirstRequest(false);
+            localStorage.setItem('lastQuery', searchQuery);
         }
     }, [downloadedMovies, handleSearchByQuery, searchQuery, setFindedMovies]);
     
     useEffect(() => {
         handleMoviesSearch();
-    }, [handleMoviesSearch]);  
+    }, [handleMoviesSearch]);
     
-    const setMoviesFromLastSearch = useCallback(() => {
-        const getLastSearchMovies = localStorage.getItem('lastSearchMovies');
-        if (getLastSearchMovies && isFirstRequest) {
-            setFindedMovies(JSON.parse(getLastSearchMovies));
+    const getLastCheckboxStatus = useCallback(() => {
+        const lastCheckboxStatus = localStorage.getItem('isShortStatus');
+        if (lastCheckboxStatus && lastCheckboxStatus === 'true') {
+            return true;
+        } else {
+            return false;
+        }
+    }, []);
+
+    
+    const showMoviesFromLastSearch = useCallback(() => {
+        const lastQuery = localStorage.getItem('lastQuery');
+        if (lastQuery && isFirstRequest) {
+            const longMovies = handleSearchByQuery(downloadedMovies, lastQuery);
+            const shortMovies = filterShortMovies(longMovies);
+            if (getLastCheckboxStatus()) {
+                setFindedMovies(shortMovies);
+                setIsMoviesShort(true);
+            } else {
+                setFindedMovies(longMovies);
+                setIsMoviesShort(false);
+            }
         } else {
             console.log('Фильмы из последнего запроса не установлены');
         }
-    }, [isFirstRequest, setFindedMovies]);
+    }, [isFirstRequest, handleSearchByQuery, downloadedMovies, filterShortMovies, getLastCheckboxStatus, setIsMoviesShort]);
     
     useEffect(() => {
-        setMoviesFromLastSearch();
-    }, [setMoviesFromLastSearch]);  
+        showMoviesFromLastSearch();
+    }, [showMoviesFromLastSearch]);
 
     return (
         <>

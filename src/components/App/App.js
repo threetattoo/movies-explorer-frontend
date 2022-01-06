@@ -11,14 +11,11 @@ import NotFound from '../NotFound/NotFound';
 import Footer from '../Footer/Footer';
 import Preloader from '../Preloader/Preloader';
 import { Route, Switch, useLocation, useHistory } from 'react-router-dom';
-import { useState, useEffect } from 'react';
 import CurrentUserContext from '../../context/CurrentUserContext';
 import ProtectedRoute from  '../ProtectedRoute/ProtectedRoute';
 import mainApi from '../../utils/MainApi';
 import moviesApi from '../../utils/MoviesApi';
 import {
-    BEATFILM_API_URL,
-    MAIN_API_URL,
     BEATFILM_DOMAIN_URL,
 } from '../../utils/constants';
 
@@ -31,7 +28,7 @@ function App() {
     const [ downloadedMovies, setDownloadedMovies ] = React.useState([]);
     const [ isMoviesShort, setIsMoviesShort ] = React.useState(false);
     const [ savedMovies, setSavedMovies ] = React.useState([]);
-    const [ findedMovies, setFindedMovies ] = React.useState([]);
+
     const history = useHistory();
     const location = useLocation();
 
@@ -103,7 +100,7 @@ function App() {
                 (location.pathname === '/signin' || location.pathname === '/signup') ? history.push('/movies') : history.push(location.pathname);
             })
             .catch((err) => {
-                console.log('Не получилось получить данные пользователя');
+                console.log('Не удалось получить данные пользователя');
                 handleError(err);
             })
     }
@@ -224,10 +221,12 @@ function App() {
             handleGetSavedMovies();
             isMoviesDownloaded();
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoggedIn]);
     
     React.useEffect(() => {
             getUserInfo();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     
     return (
@@ -245,8 +244,6 @@ function App() {
                         path="/movies"
                         component={Movies}
                         isLoggedIn={isLoggedIn}
-                        findedMovies={findedMovies}
-                        setFindedMovies={setFindedMovies}
                         handleSearchByQuery={handleSearchByQuery}
                         downloadedMovies={downloadedMovies}
                         isMoviesShort={isMoviesShort}
@@ -263,8 +260,6 @@ function App() {
                         path="/saved-movies"
                         component={SavedMovies}
                         isLoggedIn={isLoggedIn}
-                        findedMovies={findedMovies}
-                        setFindedMovies={setFindedMovies}
                         handleSearchByQuery={handleSearchByQuery}
                         downloadedMovies={downloadedMovies}
                         isMoviesShort={isMoviesShort}

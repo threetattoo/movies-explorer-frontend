@@ -6,6 +6,7 @@ import Preloader from "../Preloader/Preloader";
 
 function MoviesCardList(
     {
+        searchQuery,
         isMoviesShort,
         filterShortMovies,
         findedMovies,
@@ -17,8 +18,9 @@ function MoviesCardList(
         isPreloaderShowing,
     }
 ) {
-    const [numberOfCardsToShow, setNumberOfCardsToShow] = useState(0);
-    const [renderMovies, setRenderMovies] = useState([]);
+    const [ numberOfCardsToShow, setNumberOfCardsToShow ] = useState(0);
+    const [ renderMovies, setRenderMovies ] = useState([]);
+    const [ moviesErrorMessage, setMoviesErrorMessage ] = useState('');
     const location = useLocation();
     
     const numberOfInitialCards = () => {
@@ -45,17 +47,10 @@ function MoviesCardList(
     const setTypeOfMovies = useCallback(() => {
         (isMoviesShort) ? setRenderMovies(filterShortMovies(findedMovies)) : setRenderMovies(findedMovies);
     }, [filterShortMovies, findedMovies, isMoviesShort]);
-    
-    const setLastSearchMovies = useCallback(() => {
-        if (findedMovies.length > 0  && location.pathname === "/movies") {
-            localStorage.setItem('lastSearchMovies', JSON.stringify(findedMovies));
-        }
-    }, [findedMovies, location.pathname]);
 
     useEffect(() => {
         setTypeOfMovies();
-        setLastSearchMovies();
-    }, [setLastSearchMovies, setTypeOfMovies]);
+    }, [setTypeOfMovies]);
 
     function handleClickMore() {
         if (window.innerWidth >= 570) {
@@ -64,7 +59,22 @@ function MoviesCardList(
             setNumberOfCardsToShow(numberOfCardsToShow + 5);
         }
     }
-
+    
+    useEffect(() => {
+        const lastQuery = localStorage.getItem('lastQuery');
+        if (location.pathname === '/saved-movies' && renderMovies.length === 0) {
+            setMoviesErrorMessage('Здесь появятся ваши сохраненные фильмы.');
+        } else if (!lastQuery && renderMovies.length === 0) {
+            setMoviesErrorMessage('Здесь появятся ваши фильмы.');
+        } else if (lastQuery && isMoviesShort && renderMovies.length === 0) {
+            setMoviesErrorMessage('Короткометражных фильмов по зарпосу не найдено.');
+        } else if (lastQuery && renderMovies.length === 0) {
+            setMoviesErrorMessage('По последнему запросу ничего не найдено.');
+        } else {
+            setMoviesErrorMessage(' ');
+        }
+    }, [isMoviesShort, location.pathname, moviesErrorMessage, renderMovies.length, searchQuery, setMoviesErrorMessage]);
+    
     return(
         <Switch>
             <Route path="/movies">
@@ -73,6 +83,9 @@ function MoviesCardList(
                 isPreloaderShowing ? (<Preloader/>) :
                     renderMovies && (
                         <>
+                        <p className="movies__messages">
+                            <span className="movies__messages-text">{ moviesErrorMessage }</span>
+                        </p>
                         <ul className="movies-card__list">
                             {renderMovies.map((movie) => {
                                 return (
@@ -102,6 +115,9 @@ function MoviesCardList(
                 <section className="movies movies_saved">
                 {renderMovies && (
                     <>
+                    <p className="movies__messages">
+                        <span className="movies__messages-text">{ moviesErrorMessage }</span>
+                    </p>
                     <ul className="movies-card__list">
                         {renderMovies.map((movie) => {
                             return (

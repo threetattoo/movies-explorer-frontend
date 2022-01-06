@@ -18,7 +18,7 @@ function SearchForm(
 
     function changeMoviesType(e) {
         setIsMoviesShort(!isMoviesShort);
-        localStorage.setItem('isShortStatus', JSON.stringify(isMoviesShort));
+        localStorage.setItem('isShortStatus', JSON.stringify(!isMoviesShort));
     }
 
     function searchFormHandler(evt) {
