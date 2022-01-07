@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import './App.css';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
@@ -9,7 +9,7 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import NotFound from '../NotFound/NotFound';
 import Footer from '../Footer/Footer';
-import { Route, Switch, useLocation, useHistory } from 'react-router-dom';
+import { Route, Switch, useLocation, useHistory  } from 'react-router-dom';
 import CurrentUserContext from '../../context/CurrentUserContext';
 import ProtectedRoute from  '../ProtectedRoute/ProtectedRoute';
 import mainApi from '../../utils/MainApi';
@@ -50,6 +50,7 @@ function App() {
         setIsPreloaderShowing(true);
         mainApi.login({ email, password })
             .then(() => {
+                setIsLoggedIn(true);
                 getUserInfo();
             })
             .catch((err) => {
@@ -66,6 +67,9 @@ function App() {
             .then(() => {
                 setIsLoggedIn(false);
                 history.push('/');
+                localStorage.removeItem('localMovies');
+                localStorage.removeItem('lastQuery');
+                localStorage.removeItem('isShortStatus');
             })
             .catch((err) => {
                 handleError(err);
@@ -104,6 +108,7 @@ function App() {
             })
     }
 
+
     function handleError(err) {
         if (err.status === 401) {
             setIsLoggedIn(false);
@@ -111,14 +116,14 @@ function App() {
         }
     }
 
-    function isMoviesDownloaded() {
+    const isMoviesDownloaded = useCallback(() => {
         const localMovies = localStorage.getItem('localMovies');
         if (localMovies) {
             setDownloadedMovies(JSON.parse(localMovies));
         } else {
             handleGetMovies();
         }
-    }
+    }, []);
 
     function handleGetMovies() {
         moviesApi.getMovies()
@@ -139,6 +144,8 @@ function App() {
                     }
                 });
             localStorage.setItem('localMovies', JSON.stringify(formattedMovies));
+            const localMovies = localStorage.getItem('localMovies');
+            setDownloadedMovies(JSON.parse(localMovies));
             })
             .catch(() => {
                 console.log('Ошибка API');
@@ -227,6 +234,7 @@ function App() {
             getUserInfo();
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+ 
     
     return (
         <CurrentUserContext.Provider value={currentUser}>

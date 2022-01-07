@@ -25,7 +25,7 @@ function Movies(
     const [ findedMovies, setFindedMovies ] = React.useState([]);
     
     const handleMoviesSearch = useCallback(() => {
-        if (searchQuery) {
+        if (searchQuery.length > 0) {
             setFindedMovies(handleSearchByQuery(downloadedMovies, searchQuery));
             setIsFirstRequest(false);
             localStorage.setItem('lastQuery', searchQuery);
@@ -35,7 +35,7 @@ function Movies(
     useEffect(() => {
         handleMoviesSearch();
     }, [handleMoviesSearch]);
-    
+
     const getLastCheckboxStatus = useCallback(() => {
         const lastCheckboxStatus = localStorage.getItem('isShortStatus');
         if (lastCheckboxStatus && lastCheckboxStatus === 'true') {
@@ -59,14 +59,14 @@ function Movies(
                 setIsMoviesShort(false);
             }
         } else {
-            console.log('Фильмы из последнего запроса не установлены');
+            console.log(isFirstRequest);
         }
-    }, [isFirstRequest, handleSearchByQuery, downloadedMovies, filterShortMovies, getLastCheckboxStatus, setIsMoviesShort]);
+    }, [downloadedMovies, filterShortMovies, getLastCheckboxStatus, handleSearchByQuery, isFirstRequest, setIsMoviesShort]);
     
     useEffect(() => {
         showMoviesFromLastSearch();
     }, [showMoviesFromLastSearch]);
-
+    
     return (
         <>
             <Header />
