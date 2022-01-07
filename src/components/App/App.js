@@ -124,7 +124,7 @@ function App() {
             handleGetMovies();
         }
     }, []);
-
+     
     function handleGetMovies() {
         moviesApi.getMovies()
             .then((moviesList) => {
@@ -153,7 +153,7 @@ function App() {
                 setDownloadedMovies(JSON.parse(localMovies));
             })
     }
-
+    
     function handleSearchByQuery(data, searchQuery) {
         const searchResult = data.filter((movie) => {
             return movie.nameRU.toLocaleLowerCase().includes(searchQuery.toLocaleLowerCase());
