@@ -144,11 +144,13 @@ function App() {
                     }
                 });
             localStorage.setItem('localMovies', JSON.stringify(formattedMovies));
-            const localMovies = localStorage.getItem('localMovies');
-            setDownloadedMovies(JSON.parse(localMovies));
             })
             .catch(() => {
                 console.log('Ошибка API');
+            })
+            .finally(() => {
+                const localMovies = localStorage.getItem('localMovies');
+                setDownloadedMovies(JSON.parse(localMovies));
             })
     }
 
