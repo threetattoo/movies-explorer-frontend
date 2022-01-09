@@ -1,9 +1,43 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './MoviesCard.css';
 import { Route, Switch } from 'react-router-dom';
-import thumb from '../../images/moviethumbs/1.png';
 
-function MoviesCard({ type, }) {
+function MoviesCard(
+    {
+        movie,
+        savedMovies,
+        checkIsMovieSaved,
+        handleSaveMovie,
+        handleDeleteMovie,
+        handleLikeMovie
+    }
+) {
+
+    const [isSaved, setIsSaved] = useState(false);
+
+    function convertDuration(duration) {
+        const hours = Math.trunc(duration / 60);
+        const minutes = duration % 60;    
+        const convertedDuration = hours + 'ч ' + minutes + 'м';
+        return convertedDuration;
+    };
+    
+    const isMovieSaved = checkIsMovieSaved(movie);
+
+    function handleLikeClick() {
+        setIsSaved(!isSaved);   
+        handleLikeMovie(movie);
+    };
+    
+    useEffect(() => {
+        if (isMovieSaved) {
+            setIsSaved(true);
+        } else {
+            setIsSaved(false);
+        }
+    }, [isMovieSaved]);
+    
+    
     return(
         <Switch>
             <Route path="/movies">
@@ -11,34 +45,48 @@ function MoviesCard({ type, }) {
                     <div className="movies-card__info">
                         <div className="movies-card__data">
                             <h2 className="movies-card__title">
-                                33 слова о дизайне
+                            {movie.nameRU}
                             </h2>
                             <span className="movies-card__duration">
-                                1ч42м
+                                {convertDuration(movie.duration)}
                             </span>
                         </div>
-                        <button className={`movies-card__type-save ${type === "saved" ? "movies-card__type-save_saved" : ""}`} type="button"></button>
+                        <button
+                            className={`movies-card__type-save ${isSaved ? "movies-card__type-save_saved" : ""}`}
+                            type="button"
+                            onClick={handleLikeClick}
+                        >
+                        </button>
                     </div>
                     <div className="movies-card__thumb-wrapper">
-                        <img src={thumb} className="movies-card__thumb" alt="Обложка кинофильма" />
+                        <a href={movie.trailer}>
+                            <img src={movie.image} target="_blank" className="movies-card__thumb" alt="Обложка кинофильма" />
+                        </a>
                     </div>
                 </li>
             </Route>
             <Route path="/saved-movies">
-            <li className="movies-card">
+                <li className="movies-card">
                     <div className="movies-card__info">
                         <div className="movies-card__data">
                             <h2 className="movies-card__title">
-                                33 слова о дизайне
+                            {movie.nameRU}
                             </h2>
                             <span className="movies-card__duration">
-                                1ч42м
+                                {convertDuration(movie.duration)}
                             </span>
                         </div>
-                        <button className="movies-card__type-save movies-card__type-delete" type="button"></button>
+                        <button
+                            className={`movies-card__type-save ${isSaved ? "movies-card__type-delete" : ""}`}
+                            type="button"
+                            onClick={handleLikeClick}
+                        >
+                        </button>
                     </div>
                     <div className="movies-card__thumb-wrapper">
-                        <img src={thumb} className="movies-card__thumb" alt="Обложка кинофильма" />
+                        <a href={movie.trailer}>
+                            <img src={movie.image} target="_blank" className="movies-card__thumb" alt="Обложка кинофильма" />
+                        </a>
                     </div>
                 </li>
             </Route>

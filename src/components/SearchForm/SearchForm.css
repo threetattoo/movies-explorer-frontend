@@ -47,8 +47,21 @@
     transition: 0.5s linear;
 }
 
+.search-form__submit_disabled {
+    background-color: #bcedd3;
+}
+
 .search-form__submit:hover {
     opacity: 0.8;
+}
+
+.searchform__error {
+    height: 12px;
+    margin: 0;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    color: #EE3465;
 }
 
 @media screen and (max-width: 800px) {
