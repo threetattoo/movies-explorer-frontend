@@ -5,6 +5,7 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
 
 function SavedMovies({
+    isLoggedIn,
     isMoviesShort,
     setIsMoviesShort,
     handleSearchByQuery,
@@ -15,6 +16,8 @@ function SavedMovies({
     handleSaveMovie,
     handleDeleteMovie,
     handleLikeMovie,
+    isPreloaderShowing,
+    setIsPreloaderShowing,
 }) {
 
     const [ searchQuery, setSearchQuery ] = React.useState('');
@@ -32,17 +35,21 @@ function SavedMovies({
     function handleMoviesSearch() {
         if (searchQuery) {
             setFindedMovies(handleSearchByQuery(savedMovies, searchQuery));
+            setTimeout(() => setIsPreloaderShowing(false), 1000);
         }
     }
     return (
         <>
-            <Header />
+            <Header
+                isLoggedIn={isLoggedIn}
+            />
             <main className="main">
                 <SearchForm
                     searchQuery={searchQuery}
                     setSearchQuery={setSearchQuery}
                     isMoviesShort={isMoviesShort}
                     setIsMoviesShort={setIsMoviesShort}
+                    setIsPreloaderShowing={setIsPreloaderShowing}
                 />
                 <MoviesCardList
                     searchQuery={searchQuery}
@@ -57,6 +64,7 @@ function SavedMovies({
                     handleSaveMovie={handleSaveMovie}
                     handleDeleteMovie={handleDeleteMovie}
                     handleLikeMovie={handleLikeMovie}
+                    isPreloaderShowing={isPreloaderShowing}
                 />
             </main>
             <Footer />

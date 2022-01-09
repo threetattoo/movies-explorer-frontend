@@ -2,7 +2,7 @@ import React from 'react';
 import Authentification from '../Authentification/Authentification';
 import useFormValidator from '../FormValidator/FormValidator';
 
-function Register({ onSubmit, serverErrorMessage }) {
+function Register({ onSubmit, serverErrorMessage, isPreloaderShowing, }) {
     const formWithValidation = useFormValidator();
     const { name, email, password } = formWithValidation.values;
     const { values, errors, isFormValid, resetForm } = formWithValidation;
@@ -26,6 +26,7 @@ function Register({ onSubmit, serverErrorMessage }) {
                 handleSubmitForm={handleSubmit}
                 isFormValid={isFormValid}
                 serverErrorMessage={serverErrorMessage}
+                isPreloaderShowing={isPreloaderShowing}
             >
             <div className="authentification__form-field">
                 <label className="authentification__form-label">Имя</label>
@@ -53,6 +54,7 @@ function Register({ onSubmit, serverErrorMessage }) {
                     placeholder="e-mail"
                     value={values.email || ''}
                     onChange={formWithValidation.handleChange}
+                    pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
                     required
                 />
                 <p className="authentification__form-error">{errors.email}</p>
@@ -66,6 +68,8 @@ function Register({ onSubmit, serverErrorMessage }) {
                     id="password-input"
                     placeholder="Пароль"
                     value={values.password || ''}
+                    minLength="8"
+                    maxLength="30"
                     onChange={formWithValidation.handleChange}
                     required
                 />

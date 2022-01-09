@@ -12,6 +12,7 @@ function Register({
         handleSubmitForm,
         isFormValid,
         serverErrorMessage,
+        isPreloaderShowing,
       }) {
     return (
         <section className="authentification">
@@ -30,7 +31,7 @@ function Register({
                     <button
                         className={`authentification__submit-button ${!isFormValid && "authentification__submit-button_disabled"}`}
                         type="submit"
-                        disabled={!isFormValid}
+                        disabled={!isFormValid && !isPreloaderShowing}
                     >
                         {buttonName}
                     </button>

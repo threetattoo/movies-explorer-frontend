@@ -6,6 +6,7 @@ import CurrentUserContext from '../../context/CurrentUserContext';
 
 function Profile(
     {
+        isLoggedIn,
         onLogout,
         onUpdate,
         isSuccessMessageShowing,
@@ -13,15 +14,14 @@ function Profile(
     }
 ) {
     const formWithValidation = useFormValidator();
-    const { name, email } = formWithValidation.values;
     const { values, errors, isFormValid, resetForm, setValues } = formWithValidation;
     const currentUser = React.useContext(CurrentUserContext);
+    const { name = currentUser.name, email = currentUser.email } = formWithValidation.values;
     
     React.useEffect(() => {
         setValues(currentUser);
         resetForm();
-        setIsSuccessMessageShowing(false);
-    }, [resetForm, setIsSuccessMessageShowing]);
+    }, [currentUser, resetForm, setValues]);
 
     function handleSubmitForm(evt) {
         evt.preventDefault();
@@ -35,13 +35,20 @@ function Profile(
     
     let disabledStatus = formStatus();
 
+    function handleChange(evt) {
+        formWithValidation.handleChange(evt);
+        setIsSuccessMessageShowing(false);
+    }
+
     return (
         <>
-            <Header />
+            <Header
+                isLoggedIn={isLoggedIn}
+            />
             <main className="main">
                 <section className="profile">
                     <h1 className="profile__hello">
-                        Привет, Username
+                        Привет, {currentUser.name}
                     </h1>
                     <form
                         className="profile__form"
@@ -56,10 +63,10 @@ function Profile(
                                     type="text"
                                     name="name"
                                     id="name-input"
-                                    placeholder={currentUser.name}
-                                    onChange={formWithValidation.handleChange}
+                                    placeholder="Имя"
+                                    onChange={handleChange}
                                     required
-                                    value={values.name || ''}
+                                    value={values.name || currentUser.name}
                                     disabled=""
                                 />
                             </div>
@@ -71,10 +78,11 @@ function Profile(
                                     type="email"
                                     name="email"
                                     id="email-input"
+                                    pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
                                     placeholder={currentUser.email}
                                     onChange={formWithValidation.handleChange}
                                     required
-                                    value={values.email || ''}
+                                    value={values.email || currentUser.email}
                                     disabled=""
                                 />
                             </div>

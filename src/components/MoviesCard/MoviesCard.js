@@ -24,38 +24,18 @@ function MoviesCard(
     
     const isMovieSaved = checkIsMovieSaved(movie);
 
-    useEffect(() => {
-        if (isMovieSaved) {
-            setIsSaved(true);
-        } else {
-            setIsSaved(false);
-        }
-    }, []);
-
     function handleLikeClick() {
         setIsSaved(!isSaved);   
         handleLikeMovie(movie);
     };
     
-    /*
-    let isSaved = false;
-    let savedMovie;
-    isSaved = savedMovies.some((item) => {
-        if (item.movieId === movie.movieId) {
-            savedMovie = item;
-            return true;
-        }
-        return false;
-    });
-    */
-    
     useEffect(() => {
         if (isMovieSaved) {
             setIsSaved(true);
         } else {
             setIsSaved(false);
         }
-    }, []);
+    }, [isMovieSaved]);
     
     
     return(

@@ -9,7 +9,7 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import NotFound from '../NotFound/NotFound';
 import Footer from '../Footer/Footer';
-import { Route, Switch, useLocation, useHistory  } from 'react-router-dom';
+import { Route, Switch, useLocation, useHistory } from 'react-router-dom';
 import CurrentUserContext from '../../context/CurrentUserContext';
 import ProtectedRoute from  '../ProtectedRoute/ProtectedRoute';
 import mainApi from '../../utils/MainApi';
@@ -82,15 +82,15 @@ function App() {
     function handleUpdateUser({ name, email }) {
         setIsPreloaderShowing(true);
         mainApi.setNewUserInfo({ name, email })
-          .then(() => {
-            setCurrentUser({ name, email });
-          })
-          .catch((err) => {
-            handleError(err);
-          })
-          .finally(() => {
-            setIsSuccessMessageShowing(true);
-            setIsPreloaderShowing(false);
+            .then(() => {
+                setCurrentUser({ name, email });
+            })
+            .catch((err) => {
+                handleError(err);
+            })
+            .finally(() => {
+                setIsSuccessMessageShowing(true);
+                setIsPreloaderShowing(false);
         })
     }
 
@@ -237,7 +237,6 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
  
-    
     return (
         <CurrentUserContext.Provider value={currentUser}>
             <div className="page">
@@ -264,6 +263,7 @@ function App() {
                         savedMovies={savedMovies}
                         checkIsMovieSaved={checkIsMovieSaved}
                         isPreloaderShowing={isPreloaderShowing}
+                        setIsPreloaderShowing={setIsPreloaderShowing}
                     />
                     <ProtectedRoute
                         path="/saved-movies"
@@ -280,6 +280,7 @@ function App() {
                         savedMovies={savedMovies}
                         checkIsMovieSaved={checkIsMovieSaved}
                         isPreloaderShowing={isPreloaderShowing}
+                        setIsPreloaderShowing={setIsPreloaderShowing}
                     />
                     <ProtectedRoute
                         path="/profile" 
@@ -293,13 +294,15 @@ function App() {
                     <Route path="/signin">
                         <Login
                             serverErrorMessage={serverErrorMessage}
-                            onSubmit={handleLogin}                        
+                            onSubmit={handleLogin}
+                            isPreloaderShowing={isPreloaderShowing}                       
                         />
                     </Route>
                     <Route path="/signup">
                         <Register
                             serverErrorMessage={serverErrorMessage}
                             onSubmit={handleRegister}
+                            isPreloaderShowing={isPreloaderShowing}
                         />
                     </Route>
                     <Route path="*">

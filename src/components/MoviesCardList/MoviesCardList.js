@@ -3,6 +3,15 @@ import { Route, Switch, useLocation } from 'react-router-dom';
 import MoviesCard from '../../components/MoviesCard/MoviesCard';
 import './MoviesCardList.css';
 import Preloader from "../Preloader/Preloader";
+import {
+    DESKTOP_AMOUNT_OF_CARDS,
+    MOBILE_AMOUNT_OF_CARDS,
+    HERE_WILL_BE_YOUR_SAVED_MOVIES,
+    HERE_WILL_BE_YOUR_MOVIES,
+    SHORT_MOVIES_NOT_FOUND,
+    NO_MOVIES_WITH_LAST_QUERY,
+    PAGE_WIDTH,
+} from '../../utils/constants';
 
 function MoviesCardList(
     {
@@ -16,6 +25,7 @@ function MoviesCardList(
         checkIsMovieSaved,
         handleLikeMovie,
         isPreloaderShowing,
+        setIsPreloaderShowing,
     }
 ) {
     const [ numberOfCardsToShow, setNumberOfCardsToShow ] = useState(0);
@@ -24,10 +34,10 @@ function MoviesCardList(
     const location = useLocation();
     
     const numberOfInitialCards = () => {
-        if (window.innerWidth > 570) {
-            setNumberOfCardsToShow(7);
-        } else if (window.innerWidth <= 570) {
-            setNumberOfCardsToShow(5);
+        if (window.innerWidth > PAGE_WIDTH) {
+            setNumberOfCardsToShow(DESKTOP_AMOUNT_OF_CARDS);
+        } else if (window.innerWidth <= PAGE_WIDTH) {
+            setNumberOfCardsToShow(MOBILE_AMOUNT_OF_CARDS);
         } else {
             return;
         }
@@ -53,23 +63,23 @@ function MoviesCardList(
     }, [setTypeOfMovies]);
 
     function handleClickMore() {
-        if (window.innerWidth >= 570) {
-            setNumberOfCardsToShow(numberOfCardsToShow + 7);
+        if (window.innerWidth >= PAGE_WIDTH) {
+            setNumberOfCardsToShow(numberOfCardsToShow + DESKTOP_AMOUNT_OF_CARDS);
         } else {
-            setNumberOfCardsToShow(numberOfCardsToShow + 5);
+            setNumberOfCardsToShow(numberOfCardsToShow + MOBILE_AMOUNT_OF_CARDS);
         }
     }
     
     useEffect(() => {
         const lastQuery = localStorage.getItem('lastQuery');
         if (location.pathname === '/saved-movies' && renderMovies.length === 0) {
-            setMoviesErrorMessage('Здесь появятся ваши сохраненные фильмы.');
+            setMoviesErrorMessage(HERE_WILL_BE_YOUR_SAVED_MOVIES);
         } else if (!lastQuery && renderMovies.length === 0) {
-            setMoviesErrorMessage('Здесь появятся ваши фильмы.');
+            setMoviesErrorMessage(HERE_WILL_BE_YOUR_MOVIES);
         } else if (lastQuery && isMoviesShort && renderMovies.length === 0) {
-            setMoviesErrorMessage('Короткометражных фильмов по зарпосу не найдено.');
+            setMoviesErrorMessage(SHORT_MOVIES_NOT_FOUND);
         } else if (lastQuery && renderMovies.length === 0) {
-            setMoviesErrorMessage('По последнему запросу ничего не найдено.');
+            setMoviesErrorMessage(NO_MOVIES_WITH_LAST_QUERY);
         } else {
             setMoviesErrorMessage(' ');
         }
@@ -113,27 +123,29 @@ function MoviesCardList(
             </Route>
             <Route path="/saved-movies">
                 <section className="movies movies_saved">
-                {renderMovies && (
-                    <>
-                    <p className="movies__messages">
-                        <span className="movies__messages-text">{ moviesErrorMessage }</span>
-                    </p>
-                    <ul className="movies-card__list">
-                        {renderMovies.map((movie) => {
-                            return (
-                                <MoviesCard
-                                    key={movie.movieId}
-                                    movie={movie}
-                                    savedMovies={savedMovies}
-                                    checkIsMovieSaved={checkIsMovieSaved}
-                                    handleSaveMovie={handleSaveMovie}
-                                    handleDeleteMovie={handleDeleteMovie}
-                                    handleLikeMovie={handleLikeMovie}
-                                />
-                            )
-                        })}
-                    </ul>
-                    </>
+                {
+                isPreloaderShowing ? (<Preloader/>) :
+                    renderMovies && (
+                        <>
+                        <p className="movies__messages">
+                            <span className="movies__messages-text">{ moviesErrorMessage }</span>
+                        </p>
+                        <ul className="movies-card__list">
+                            {renderMovies.map((movie) => {
+                                return (
+                                    <MoviesCard
+                                        key={movie.movieId}
+                                        movie={movie}
+                                        savedMovies={savedMovies}
+                                        checkIsMovieSaved={checkIsMovieSaved}
+                                        handleSaveMovie={handleSaveMovie}
+                                        handleDeleteMovie={handleDeleteMovie}
+                                        handleLikeMovie={handleLikeMovie}
+                                    />
+                                )
+                            })}
+                        </ul>
+                        </>
                 )}
                 </section>
             </Route>

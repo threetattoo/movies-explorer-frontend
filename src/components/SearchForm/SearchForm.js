@@ -1,16 +1,18 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import './SearchForm.css';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import useFormValidator from '../FormValidator/FormValidator';
-
+const lastQuery = localStorage.getItem('lastQuery');
 
 function SearchForm(
-    {setSearchQuery, isMoviesShort, setIsMoviesShort,}
+    {setSearchQuery, isMoviesShort, setIsMoviesShort, setIsPreloaderShowing }
 ) {
 
     const formWithValidation = useFormValidator();
     const { searchValue } = formWithValidation.values;
     const { errors, isFormValid, resetForm } = formWithValidation;
+    const location = useLocation();
 
     React.useEffect(() => {
         resetForm();
@@ -24,6 +26,7 @@ function SearchForm(
     function searchFormHandler(evt) {
         evt.preventDefault();
         setSearchQuery(searchValue);
+        setIsPreloaderShowing(true);
     }
 
     return(
@@ -36,7 +39,7 @@ function SearchForm(
                     <fieldset className="searchform__input-fieldset">
                         <input
                             className="search-form__input"
-                            placeholder="Фильм"
+                            placeholder={(location.pathname === "/movies") ? lastQuery || 'Фильм' : 'Фильм'}
                             name="searchValue"
                             id="searchValue"
                             value={searchValue || ''}

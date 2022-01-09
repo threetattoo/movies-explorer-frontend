@@ -3,7 +3,7 @@ import './Login.css';
 import Authentification from '../Authentification/Authentification';
 import useFormValidator from '../FormValidator/FormValidator';
 
-function Login({ onSubmit, serverErrorMessage }) {
+function Login({ onSubmit, serverErrorMessage, isPreloaderShowing }) {
     const formWithValidation = useFormValidator();
     const { email, password } = formWithValidation.values;
     const { values, errors, isFormValid, resetForm } = formWithValidation;
@@ -27,6 +27,7 @@ function Login({ onSubmit, serverErrorMessage }) {
             handleSubmitForm={handleSubmit}
             isFormValid={isFormValid}
             serverErrorMessage={serverErrorMessage}
+            isPreloaderShowing={isPreloaderShowing}
         >
         <div className="authentification__form-field">
             <label className="authentification__form-label">E-mail</label>
@@ -36,6 +37,7 @@ function Login({ onSubmit, serverErrorMessage }) {
                 type="email"
                 placeholder="e-mail"
                 id="email-input"
+                pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
                 value={values.email || ''}
                 onChange={formWithValidation.handleChange}
                 required
