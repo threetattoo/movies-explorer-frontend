@@ -1,7 +1,7 @@
 export const BEATFILM_API_URL = 'https://api.nomoreparties.co/beatfilm-movies';
 export const BEATFILM_DOMAIN_URL = 'https://api.nomoreparties.co';
-//export const MAIN_API_URL = 'https://api.threetattoo-diploma.nomoredomains.rocks';
-export const MAIN_API_URL = 'http://localhost:3000';
+export const MAIN_API_URL = 'https://api.threetattoo-diploma.nomoredomains.rocks';
+//export const MAIN_API_URL = 'http://localhost:3000';
 export const DESKTOP_AMOUNT_OF_CARDS = 7;
 export const MOBILE_AMOUNT_OF_CARDS = 5;
 export const PAGE_WIDTH = 570;
